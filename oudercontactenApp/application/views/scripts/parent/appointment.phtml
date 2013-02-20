@@ -1,0 +1,117 @@
+<?php require_once 'My/DateUtilities.php'; ?>
+
+<div class="center">
+    <h2>Afspraken <?php echo htmlentities($this->conferenceName) ?></h2>
+    <p class="breadcrumb"><a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'index'), null, true) ?>">Home</a> > Afspraken</p>
+    <div class="printOnly">
+        <p>Beste <?php echo htmlentities($this->user) ?></p>
+        <p>Onderstaand vindt u een overzicht van de afspraken die momenteel voor u gereserveerd werden voor dit oudercontact.</p>
+    </div>
+    <div id="titular">
+        <h3>Klassenleraren</h3>
+        <?php if ($this->titularAppointmentsAvailable) { 
+            if ($this->titularAppointments != null) {?>
+                <table class="table table-striped">
+                    <?php $activeTitularDate = null;
+                    foreach($this->titularAppointments as $appointment) { ?>
+                        <?php
+                        if ($activeTitularDate != $appointment['date']) {
+                            $activeTitularDate = $appointment['date'] ?>
+                            <tr>
+                                <th><?php echo htmlentities(DateUtilities::weekday(strtotime($appointment['date']), true) . ' ' . date('d', strtotime($appointment['date'])) . ' ' . DateUtilities::month(strtotime($appointment['date']), true)) ?></th>
+                                <th>leerkracht</th>
+                                <th>functie</th>
+                                <th>lokaal</th>
+                                <th>leerling</th>
+                            </tr>
+                        <?php } ?>
+                        <tr>
+                            <td><?php echo htmlentities($appointment['appointment'] != null ? date('H:i', strtotime($appointment['appointment'])) : '-') ?></td>
+                            <td><?php echo htmlentities($appointment['sFirstname'] . ' ' . $appointment['sName']) . ($appointment['remark1'] != null ? ' <i class="icon-info-sign"><span class="tooltip" data-original-title="' . htmlentities($appointment['remark1']) . '"></span></i>' : '') . ($appointment['remark3'] != null ? ' <i class="icon-info-sign"><span class="tooltip" data-original-title="' . htmlentities($appointment['remark3']) . '"></span></i>' : '') ?></td>
+                            <td><?php echo htmlentities(($appointment['function'] != null ? $appointment['function'] : 'klassenleraar')) ?></td>
+                            <td><?php echo htmlentities($appointment['room']) ?></td>
+                            <td><?php echo htmlentities($appointment['cFirstname'] . ' ' . $appointment['cName']) ?></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+                <a href="#" class="btn btnPrint"><i class="icon-print"></i> Print agenda</a>
+            <?php }
+            if ($this->titularEditable) { ?>
+                <div class="alert alert-info">
+                    <p>Deze gemaakt afspraken kunt u <a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'book', 'book' => 'type1'), null, true); ?>">wijzigen</a> tot <?php echo htmlentities($this->titularDeadline) ?>.</p>
+                </div>
+            <?php }
+            else { ?>
+                <div class="alert alert-info">
+                    <p>De inschrijvingen zijn reeds afgesloten. Indien u wijzigingen wilt aanbrengen dient u contact op te nemen met de school.</p>
+                </div>
+            <?php }
+        } else { 
+            if ($this->bookTitular) { ?>
+                <div class="alert alert-info">
+                    <p>U heeft voorlopig nog geen afspraken gemaakt voor dit oudercontact. <a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'book', 'book' => 'type1'), null, true); ?>">Maak nu uw afspraken.</a></p>
+                </div>
+            <?php } 
+            else { ?>
+                <div class="alert alert-info">
+                    <p>De inschrijvingen voor het oudercontact zijn nog niet begonnen. U kunt afspraken reserveren vanaf <?php echo htmlentities($this->start1) ?></p>
+                </div>
+            <?php } ?>
+            <p class="printOnly">U heeft geen afspraken voor dit onderdeel van het oudercontact.</p>
+        <?php } ?>
+    </div>
+    <div id="teacher">
+        <h3>Vakleerkrachten</h3>
+        <?php if ($this->teacherAppointmentsAvailable) { 
+            if ($this->teacherAppointments != null) {?>
+                <table class="table table-striped">
+                    <?php $activeTeacherDate = null;
+                    foreach($this->teacherAppointments as $appointment) { ?>
+                        <?php
+                        if ($activeTeacherDate != $appointment['date']) {
+                            $activeTeacherDate = $appointment['date'] ?>
+                            <tr>
+                                <th><?php echo htmlentities(DateUtilities::weekday(strtotime($appointment['date']), true) . ' ' . date('d', strtotime($appointment['date'])) . ' ' . DateUtilities::month(strtotime($appointment['date']), true)) ?></th>
+                                <th>leerkracht</th>
+                                <th>vak</th>
+                                <th>lokaal</th>
+                                <th>leerling</th>
+                            </tr>
+                        <?php } ?>
+                        <tr>
+                            <td><?php echo htmlentities(date('H:i', strtotime($appointment['appointment']))) ?></td>
+                            <td><?php echo htmlentities($appointment['sFirstname'] . ' ' . $appointment['sName']) . ($appointment['remark2'] != null ? ' <i class="icon-info-sign"><span class="tooltip" data-original-title="' . htmlentities($appointment['remark2']) . '"></span></i>' : '') ?></td>
+                            <td><?php echo htmlentities($appointment['course']) ?></td>
+                            <td><?php echo htmlentities($appointment['room']) ?></td>
+                            <td><?php echo htmlentities($appointment['cFirstname'] . ' ' . $appointment['cName']) ?></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+                <a href="#" class="btn btnPrint"><i class="icon-print"></i> Print agenda</a>
+            <?php } 
+            if ($this->teacherEditable) { ?>
+                <div class="alert alert-info">
+                    <p>Deze gemaakt afspraken kunt u <a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'book', 'book' => 'type2'), null, true); ?>">wijzigen</a> tot <?php echo htmlentities($this->teacherDeadline) ?>.</p>
+                </div>
+            <?php } 
+            else { ?>
+                <div class="alert alert-info">
+                    <p>De inschrijvingen zijn reeds afgesloten. Indien u wijzigingen wilt aanbrengen dient u contact op te nemen met de school.</p>
+                </div>
+            <?php }
+        } else { 
+            if ($this->bookTeacher) { ?>
+                <div class="alert alert-info">
+                    <p>U heeft voorlopig nog geen afspraken gemaakt voor dit oudercontact. <a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'book', 'book' => 'type2'), null, true); ?>">Maak nu uw afspraken.</a></p>
+                </div>
+            <?php } 
+            else { ?>
+                <div class="alert alert-info">
+                    <p>De inschrijvingen voor het oudercontact zijn nog niet begonnen. U kunt afspraken reserveren vanaf <?php echo htmlentities($this->start2) ?></p>
+                </div>
+            <?php } ?>
+            <p class="printOnly">U heeft geen afspraken voor dit onderdeel van het oudercontact.</p>
+        <?php } ?>
+            
+     </div>
+</div>

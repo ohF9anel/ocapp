@@ -1,0 +1,150 @@
+/* 
+    Document   : general
+    Created on : 20-mrt-2012, 12:07:49
+    Author     : Niels
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* header */
+#header {
+    height: 140px;
+    background-color: #777;
+    position: relative;
+}
+
+#header h1 a {
+    display: block;
+    width: 306px;
+    height: 100px;
+    text-indent: -5000px;
+    text-decoration: none;
+    background-position: 50% 50%;
+    background-image: url(../img/logo3.png);
+    background-repeat: no-repeat;
+    background-size: 306px 80px;
+    overflow: hidden;
+}
+
+#header p.user {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    color: #fff;
+}
+
+#header .navbar-inner .container{
+    width: 960px;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#header p a {
+    color: #111;
+}
+
+
+/*positioning*/
+html, body {
+height: 100%;
+}
+
+.centrate {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.clear {
+    clear: both;
+}
+
+/*sidebar*/
+#sidebar {
+    width: 230px;
+    margin-right: 20px;
+    float: left;
+}
+
+#sidebar table {
+    width: 230px;
+}
+
+#conferences {
+    padding: 15px 15px 50px 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #2c2c2c;
+    color: #ddd;
+}
+
+#conferences a {
+    color: #ddd;
+    text-decoration: underline;
+}
+
+#conferences li.active {
+    font-weight: bold;
+}
+
+#conferences li.active a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+/*content*/
+#content {
+    float: left;
+    width: 710px;
+    margin-top: 25px;
+}
+
+.pagesize, .pagedisplay {
+    width: 60px;
+    text-align: center;
+}
+
+.breadcrumb a {
+    text-decoration: underline;
+}
+
+.float {
+    float: left;
+}
+
+.printOnly {
+    display: none;
+}
+
+
+/*footer*/
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -58px;
+}
+.footer, .push {
+height: 58px;
+font-size: 9px;
+clear: both;
+}
+
+.footer {
+    background-color: #2c2c2c;
+}
+
+.footer p {
+    font-size: 9px;
+    text-align: center;
+    line-height: 12px;
+    margin: 0;
+    padding: 6px 0 0 0;
+    color: #ddd;
+}
+
+.footer p a {
+    color: #ddd;
+}

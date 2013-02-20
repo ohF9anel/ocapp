@@ -1,0 +1,41 @@
+#content .screen {
+    width: 340px;
+    min-height: 250px;
+    padding: 25px;
+    margin: 50px auto;
+    border: 2px #222 solid;
+    border-radius: 15px;
+}
+
+dl {
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+dt {
+    float: left;
+    clear: both;
+}
+
+dd {
+    margin-left: 80px;
+    margin-bottom: 7px;
+}
+
+dd input, dd select {
+    margin: 0;
+}
+
+td.hours {
+    width: 60px;
+}
+
+td.icons {
+    width: 40px;
+}
+
+.justify {
+    text-align: justify;
+}

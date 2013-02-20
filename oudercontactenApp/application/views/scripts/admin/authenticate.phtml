@@ -1,0 +1,35 @@
+<?php
+    $this->headTitle('Administratie');
+    $this->headScript()->prependFile($this->baseUrl() . '/js/admin.authenticate.js');
+?>
+
+    <div class="screen">
+        <h2>Login</h2>
+        <form id="loginForm" action="<?php echo $this->urlSelf ?>" method="post">
+            <div class="alert alert-info">
+                <p class="justify">Het aanmelden gebeurt a.d.h.v. je dbz-account (Google Apps). Wanneer je op aanmelden klikt, word je doorverwezen naar een aanmeldpagina van Google. Na het aanmelden keer je terug naar deze pagina.</p>
+            </div>
+            <?php if($this->errFail) { ?>
+                <div class="alert alert-error">
+                    <a class="close" data-dismiss="alert">&times;</a>
+                    <p><strong>Oeps!</strong> Er is een fout opgetreden bij het aanmelden. Probeer nogmaals of contacteer ICT.</p>
+                </div>
+            <?php } ?>
+            <?php if($this->userErr) { ?>
+                <div class="alert alert-error">
+                    <a class="close" data-dismiss="alert">&times;</a>
+                    <p><strong>Oeps!</strong> Je dbz-account staat niet geregisreerd voor de oudercontact applicatie, contacteer ICT.</p>
+                </div>
+            <?php } ?>
+            <?php if($this->rightsErr) { ?>
+                <div class="alert alert-error">
+                    <a class="close" data-dismiss="alert">&times;</a>
+                    <p><strong>Oeps!</strong> Je dbz-account heeft heeft momenteel geen toegang tot de administratieve functie. Contacteer ICT voor het verkrijgen van deze rechten.</p>
+                </div>
+            <?php } ?>
+            <p>
+                <input type="submit" id="btnLogin" class="btn btn-primary" name="btnLogin" value="Aanmelden" />
+                <input type="submit" id="btnCancel" class="btn" name="btnCancel" value="Annuleren" />
+            </p>
+        </form>
+    </div>

@@ -1,0 +1,170 @@
+<?php require_once 'My/DateUtilities.php'; ?>
+<?php $this->headScript()->prependFile($this->baseUrl() . '/js/parent.book.js'); ?>
+
+<h2>Boeking <?php echo htmlentities($this->type) . ' ' . htmlentities($this->name) ?></h2>
+<p class="breadcrumb"><a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'index'), null, true) ?>">Home</a> > Reservatie</p>
+<ul class="steps pull-right">
+    <li><span class="label <?php if($this->step == 1) echo 'label-info'; ?>">1</span></li>
+    <li><span class="label <?php if($this->step == 2) echo 'label-info'; ?>">2</span></li>
+    <li><span class="label <?php if($this->step == 3) echo 'label-info'; ?>">3</span></li>
+</ul>
+<?php
+switch ($this->step) {
+    case 1: ?>
+        <form action="<?php $this->url(array('controller' => 'Parent', 'action' => 'book'), null, true) ?>" method="post">
+            <div class="information alert alert-info">
+                <p>In deze eerste stap kunt u de leerkrachten selecteren die u wenst te spreken tijdens het oudercontact.</p>
+                <p class="justify">Voor elk van uw kinderen vindt u hieronder een tabblad terug. Klik op elk tabblad en selecteer telkens de leerkrachten die u voor het geselecteerde kind wilt spreken. Vervolgens kunt u verder gaan naar stap 2.</p>
+            </div>
+            <input type="submit" id="cancel1" name="cancel" value="Annuleren" />
+            <input type="submit" class="btn-primary pull-right" id="next1" name="next" value="Volgende stap" />
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <?php foreach ($this->children as $child) { ?>
+                        <li <?php if ($this->activeId == $child->getPupilId()) echo 'class="active"' ?>><a href="#s<?php echo htmlentities($child->getPupilId()); ?>" data-toggle="tab"><?php echo htmlentities($child->getFirstname()); ?></a></li>
+                    <?php } ?>
+                </ul>
+                <div class="tab-content">
+                    <?php foreach ($this->children as $child) { ?>
+                        <div class="tab-pane <?php if ($this->activeId == $child->getPupilId()) echo 'active' ?>" id="s<?php echo htmlentities($child->getPupilId()); ?>">
+                            <h4><?php echo htmlentities($child->getFirstname() . ' ' . $child->getName()) ?></h4>
+                            <p><?php echo htmlentities($child->getGroup()) ?></p>
+
+                            <?php if ($child->getType() == 'type1') { 
+                                foreach ($child->getTeachers() as $teacher) { ?>
+                                    <p><label><input type="checkbox" name="s<?php echo htmlentities($child->getPupilId()); ?>[]" value="<?php echo htmlentities($teacher->getStaffId()); ?>" <?php echo ($teacher->getToSee() ? 'checked="checked"' : '') ?> /><?php echo htmlentities($teacher->getFunction()) . ' - <span class="italic">' . htmlentities($teacher->getFirstname() . ' ' . $teacher->getName()) . '</span> ' . ($teacher->getRemark() != null ? '<i class="icon-info-sign"><span class="tooltip" data-original-title="' . $teacher->getRemark() . '"></span></i>' : '');?></label></p>
+                                <?php } 
+                                }
+                            else {
+                                foreach ($child->getTeachers() as $teacher) { ?>
+                                    <p><label><input type="checkbox" name="s<?php echo htmlentities($child->getPupilId()); ?>[]" value="<?php echo htmlentities($teacher->getCourseId()); ?>" <?php echo ($teacher->getToSee() ? 'checked="checked"' : '') ?> /><?php echo htmlentities($teacher->getFunction()) . ' - <span class="italic">' . htmlentities($teacher->getFirstname() . ' ' . $teacher->getName()) . '</span> '  . ($teacher->getRemark() != null ? '<i class="icon-info-sign"><span class="tooltip" data-original-title="' . $teacher->getRemark() . '"></span></i>' : '');?></label></p>
+                                <?php }
+                            } ?>
+
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <input type="submit" id="cancel2" name="cancel" value="Annuleren" />
+            <input type="submit" class="btn-primary pull-right" id="next2" name="next" value="Volgende stap" />
+        </form>
+        <?php break;
+    case 2: ?>
+        <?php if ($this->errFields) { ?>
+            <div class="alert alert-error clear">
+                <a class="close" data-dismiss="alert">&times;</a>
+                <p><strong>Oeps!</strong> U heeft niet voor elke leerkracht aangeduid wanneer u een afspraak wilt. Gelieve dit te doen vooralleer u verder gaat.</p>
+            </div>
+        <?php } ?>
+        <?php if ($this->errAppointment) { ?>
+            <div class="alert alert-error clear">
+                <a class="close" data-dismiss="alert">&times;</a>
+                <p><strong>Oeps!</strong> De tussentijd tussen een of meerdere afspraken voldoet niet aan de voorwaarden. Gelieve uw gemaakte afspraken nogmaals na te kijken.</p>
+            </div>
+        <?php } ?>
+
+        <form action="<?php $this->url(array('controller' => 'Parent', 'action' => 'book'), null, true) ?>" method="post">
+            <div class="information alert alert-info">
+                <p>In deze tweede stap selecteert u het gewenste tijdstip voor elke leerkracht die u wenst te spreken.</p>
+                <p class="justify">Selecteer de dag waarop u een afspraak wilt vastleggen door op het juiste tabblad te klikken. Kies vervolgens een tijdstip voor de leerkrachten die u in de vorige stap selecteerde door een bolletje aan te duiden bij het gewenste uur. Vergeet niet dat u <?php echo htmlentities($this->meantime); ?> minuten tussentijd moet voorzien tussen elke afspraak.</p>
+            </div>
+            <input type="submit" id="prev1" name="prev" value="Vorige stap" />
+            <input type="submit" id="next1" class="btn-primary pull-right" name="next" value="Volgende stap" />
+            
+            <div class="tabbable">
+                <ul class="nav nav-tabs days">
+                    <?php foreach ($this->days as $id => $day) {?>
+                    <li <?php if ($this->activeId == $id) echo 'class="active"' ?>><a href="#<?php echo htmlentities($id); ?>" data-toggle="tab"><?php echo htmlentities(DateUtilities::weekday(strtotime($day), true) . ' ' . date('d ', strtotime($day)) . DateUtilities::month(strtotime($day), true)); ?></a></li>
+                    <?php } ?>
+                </ul>
+            </div>
+            
+            <div class="tab-content">
+                <?php foreach ($this->days as $id => $day) { ?>
+                    <div class="tab-pane <?php if ($this->activeId == $id) echo 'active' ?>" id="<?php echo htmlentities($id) ?>">
+                        <table class="calendar table table-striped table-condensed">
+                            <tr>
+                                <th>&nbsp;</th>
+                                <?php foreach ($this->children as $child) { 
+                                    foreach ($child->getTeachers() as $teacher) {
+                                        if ($teacher->getToSee()) {?>
+                                            <th class="head"><?php echo (htmlentities($teacher->getFirstname() . ' ' . $teacher->getName()) . ' <br />' . htmlentities($teacher->getFunction()) . '<br />' . htmlentities($child->getFirstname())); ?></th>
+                                        <?php }
+                                    }
+                                } ?>
+                            </tr>
+                            <?php 
+                            $row = 1;
+                            foreach ($this->timeslots as $timeslot) {
+                                if (strtotime($timeslot) < strtotime($this->firstStarts[$id]) || strtotime($timeslot) >= strtotime($this->lastEnds[$id])) {
+                                    continue;
+                                }?>
+                                <tr class="r<?php echo htmlentities($row++); ?>">
+                                    <td><?php echo htmlentities($timeslot); ?></td>
+                                    <?php $col = 1;
+                                    foreach ($this->children as $child) {
+                                        foreach ($child->getTeachers() as $teacher) {
+                                            if ($teacher->getToSee()) {
+                                                if($teacher->getAppointmentDay() == $id && date('H:i', strtotime($teacher->getAppointmentSlot())) == $timeslot) { ?>
+                                                    <td class="free <?php echo htmlentities($child->getType() == 'type1' ? $teacher->getStaffId() : $teacher->getCourseId())?>"><input type="radio" class="c<?php echo htmlentities($col++); ?>" name="<?php echo htmlentities(($child->getType() == 'type1' ? 't' . $teacher->getStaffId() : 'c' . $teacher->getCourseId() ) . 'p' . $child->getPupilId());?>" value="<?php echo htmlentities($timeslot . 'd' . $id)?>" checked="checked" /></td>
+                                                <?php }
+                                                else if ($teacher->isAvailable($id, $timeslot)) { ?>
+                                                    <td class="free <?php echo htmlentities($child->getType() == 'type1' ? $teacher->getStaffId() : $teacher->getCourseId())?>"><input type="radio" class="c<?php echo htmlentities($col++); ?>" name="<?php echo htmlentities(($child->getType() == 'type1' ? 't' . $teacher->getStaffId() : 'c' . $teacher->getCourseId() ) . 'p' . $child->getPupilId());?>" value="<?php echo htmlentities($timeslot . 'd' . $id)?>" /></td>
+                                                <?php }                                                
+                                                else { ?>
+                                                    <td class="occupied">&nbsp;</td>
+                                                <?php }
+                                            }
+                                        }
+                                    } ?>
+                                </tr>
+                            <?php } ?>
+                            <tr>
+                            <th>&nbsp;</th>
+                            <?php foreach ($this->children as $child) { 
+                                foreach ($child->getTeachers() as $teacher) {
+                                    if ($teacher->getToSee()) {?>
+                                        <th class="head"><?php echo (htmlentities($teacher->getFirstname() . ' ' . $teacher->getName()) . ' <br />' . htmlentities($teacher->getFunction()) . '<br />' . htmlentities($child->getFirstname())); ?></th>
+                                    <?php }
+                                }
+                            } ?>
+                            </tr>
+                        </table>
+                    </div>
+                <?php } ?>
+            </div>
+            <input type="hidden" id="timeslot" name="timeslot" value="<?php echo htmlentities($this->timeslot) ?>" />
+            <input type="hidden" id="meantime" name="meantime" value="<?php echo htmlentities($this->meantime) ?>" />
+            <input type="hidden" id="activeDay" name="activeDay" value="<?php echo htmlentities($this->activeId) ?>" />
+            <input type="submit" id="prev2" name="prev" value="Vorige stap" />
+            <input type="submit" id="next2" class="btn-primary pull-right" name="next" value="Volgende stap" />
+        </form>
+        <?php break;
+    case 3: ?>
+        <form action="<?php $this->url(array('controller' => 'Parent', 'action' => 'book'), null, true) ?>" method="post">
+            <?php if (sizeof($this->bookedAppointments) > 0) { ?>
+                <div class="information alert alert-info">
+                    <p>Ten slotte in deze derde en laatste stap dient u uw afspraken te bevestigen</p>
+                    <p class="justify">Onderstaand vindt u een overzicht van de door u gemaakte afspraken. Als deze afspraken naar wens zijn dient u deze te bevestigen door te klikken op &quot;bevestigen&quot;, pas dan zijn de afspraken definitief.</p>
+                </div>
+                <input type="submit" id="prev1" name="prev" value="Vorige stap" />
+                <input type="submit" id="next1" class="btn-primary pull-right" name="confirm" value="Bevestigen" />
+                <table class="table">
+                    <?php foreach ($this->bookedAppointments as $date => $appointment) { ?>
+                        <tr>
+                            <td><?php echo htmlentities(DateUtilities::weekday($date, true) . ' ' . date('d', $date) . ' ' . DateUtilities::month($date, true) . ' - ' . date('H:i', $date)); ?></td>
+                            <td><?php echo htmlentities($appointment) ?></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+                <input type="submit" id="prev2" name="prev" value="Vorige stap" />
+            <?php } else { ?>
+                <div class="information alert alert-info">
+                    <p>U heeft geen afspraken gemaakt, gelieve dit te bevestigen.</p>
+                </div>
+                <input type="submit" id="prev2" name="prev2" value="Vorige stap" />
+            <?php } ?>
+            <input type="submit" id="next2" class="btn-primary pull-right" name="confirm" value="Bevestigen" />
+        </form>
+        <?php break;
+}

@@ -1,0 +1,54 @@
+<div class="center">
+    <h2>Nieuwe afspraak: <?php echo htmlentities($this->name); ?></h2>
+    <p class="breadcrumb"><a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">Home</a> > <a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'appointment'), null, true) ?>">Planning</a> > <a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'appointment-edit', 'activeId' => $this->dayId, ($this->titular ? 'tiid' : 'teid') => $this->staffId), null, true) ?>"><?php echo ($this->titular ? 'Klassenleraren' : 'Vakleerkrachten'); ?></a> > Nieuwe afspraak</p>
+    
+    <?php if($this->generalErr) { ?>
+        <div class="alert alert-error">
+            <a class="close" data-dismiss="alert">&times;</a>
+            <p><strong>Oeps!</strong> Er heeft zich een fout voorgedaan bij het maken van deze afspraak.</p>
+        </div>
+    <?php } ?>
+    <?php if($this->candidateErr) { ?>
+        <div class="alert alert-error">
+            <a class="close" data-dismiss="alert">&times;</a>
+            <p><strong>Oeps!</strong> U heeft geen deelnemer geselecteerd voor dit contact.</p>
+        </div>
+    <?php } ?>
+    
+    <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-new'), null, true) ?>" method="post">
+        <dl>
+            <dt>Dag: </dt>
+            <dd>
+                <?php echo htmlentities(DateUtilities::weekday(strtotime($this->day)) . ' ' . date('d ', strtotime($this->day)) . DateUtilities::month(strtotime($this->day))) ?>
+                <input type="hidden" name="dayId" value="<?php echo htmlentities($this->dayId) ?>" />
+            </dd>
+            <dt>Tijdstip:</dt>
+            <dd>
+                <?php echo htmlentities($this->time) ?>
+                <input type="hidden" name="time" value="<?php echo htmlentities($this->time) ?>" />
+            </dd>
+            <dt><label for="candidate">Deelnemer:</label></dt>
+            <dd>
+                <select class="large" id="candidate" name="candidate">
+                    <option value="0">selecteer een deelnemer...</option>
+                    <?php foreach ($this->candidates as $candidate) {
+                        $pupil = Application_Model_DbTable_Pupils::getPupilById($candidate->getPupilId());
+                        $group = Application_Model_DbTable_Groups::getGroupByGroupId($pupil->getGroupId());
+                        if ($candidate->getCourse() == null) { ?>
+                            <option value="<?php echo htmlentities($candidate->getpupilId() . 'p' . $candidate->getParentId()) ?>"><?php echo htmlentities(' (' . $group->getName() . ') ' . $candidate->getFirstname() . ' ' . $candidate->getName() . ' - ' . $candidate->getSalutation()) ?></option>
+                        <?php } else {?>
+                            <option value="<?php echo htmlentities($candidate->getpupilId() . 'p' . $candidate->getParentId() . 'p' . $candidate->getCourseId()) ?>"><?php echo htmlentities(' (' . $group->getName() . ' - ' . $candidate->getCourse() .') ' . $candidate->getFirstname() . ' ' . $candidate->getName() . ' - ' . $candidate->getSalutation()) ?></option>
+                        <?php }
+                    } ?>
+                </select>
+            </dd>
+            <dd>
+                <input type="hidden" name="staffId" value="<?php echo htmlentities($this->staffId) ?>" />
+                <input type="hidden" name="type" value="<?php echo $this->titular ? 'type1' : 'type2' ?>" />
+                <input type="hidden" name="courseId" value="<?php echo $this->courseId ?>" />
+                <input type="submit" class="btn btn-primary" name="btnSave" value="Maken" />
+                <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+            </dd>
+        </dl>
+    </form>
+</div>

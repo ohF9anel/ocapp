@@ -1,0 +1,13 @@
+<?php
+    $this->headTitle('Kies uw profiel');
+    $this->headLink()->prependStylesheet($this->baseUrl().'/css/index.css');
+?>
+
+<div class="screen">
+    <h2>Kies uw profiel</h2>
+    <ul class="profile">    
+        <li><a class="btn btn-info btn-large" href="<?php echo $this->escape($this->url(array('controller' => 'Parent', 'action' => 'index'))) ?>">Ik ben ouder</a></li>
+        <li><a class="btn btn-info btn-large" href="<?php echo $this->escape($this->url(array('controller' => 'Teacher', 'action' => 'index'))) ?>">Ik ben leerkracht</a></li>
+        <li><a class="btn btn-info btn-large" href="<?php echo $this->escape($this->url(array('controller' => 'Admin', 'action' => 'index')))?>">Ik ben beheerder</a></li>
+    </ul>
+</div>

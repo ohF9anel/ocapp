@@ -1,0 +1,21 @@
+Er100 Id not found
+
+Er101 Unexisting account
+Er102 Unexisting group
+Er103 Unexisting pupil
+Er104 Unexisting course
+Er105 Unexisting Conference
+Er106 Unexisting ConferenceDays
+Er107 Unexisting Childrelation
+
+Er125 Illegal password
+Er126 Not enough rights
+
+Er130 No Conference days available
+Er131 No Roomallocation maded
+Er132 Staff doesn't attend conferenceDay
+Er133 Duplicate appointment
+Er134 Duplicate appointment for parent
+
+Er150 Null in non optional field
+Er151 Update failed

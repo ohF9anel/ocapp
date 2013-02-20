@@ -1,0 +1,42 @@
+/* 
+    Document   : index.css
+    Created on : 20-mrt-2012, 13:43:07
+    Author     : Niels
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#content {
+    width: 960px;
+}
+
+#content .screen {
+    width: 340px;
+    height: 180px;
+    padding: 25px;
+    margin: 50px auto;
+    border: 2px #222 solid;
+    border-radius: 15px;
+}
+
+#content h2 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+ul.profile  {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.profile li {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+ul.profile a {
+    width: 200px;
+}

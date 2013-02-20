@@ -1,0 +1,86 @@
+<?php $this->headScript()->prependFile($this->baseUrl() . '/js/admin.appointment.js'); ?>
+
+<div class="center">
+    <h2>Planning: <?php echo htmlentities($this->conferenceName) ?></h2>
+    <p class="breadcrumb"><a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">Home</a> > Planning</p>
+    
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li <?php if ($this->activeTab == 'ti') { ?>class="active"<?php } ?>><a href="#titular" data-toggle="tab">Klassenleraren</a></li>
+            <li <?php if ($this->activeTab == 'te') { ?>class="active"<?php } ?>><a href="#teacher" data-toggle="tab">Vakleerkrachten</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane <?php if ($this->activeTab == 'ti') { ?>active<?php } ?>" id="titular">
+                <table id="titularTable" class="table table-striped tablesorter">
+                    <thead>
+                        <tr>
+                            <th><i class="icon-exclamation-sign"></i></th>
+                            <th>Klassenleraar</th>
+                            <th>Klas/functie</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($this->titulars as $titular) { ?>
+                            <tr>
+                                <td class="iconsSmall"><?php echo ($titular[3] ? '<i class="icon-exclamation-sign"></i>' : '&nbsp;' ); ?></td>
+                                <td><?php echo htmlentities($titular[1]); ?></td>
+                                <td class="function"><?php echo htmlentities($titular[2]); ?></td>
+                                <td class="iconsSmall"><a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-edit', 'tiid' => $titular[0]), null, true); ?>"><i class="icon-edit"><span class="tooltip" data-original-title="Agenda beheren"></span></i></a></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <div id="pagertitular" class="pager">
+                    <form action="<?php $this->url(array('controller' => 'Admin', 'action' => 'appointment')) ?>" method="post">
+                        <p>
+                            <a class="prev btn">Vorige</a>
+                            <input class="pagedisplay" type="text" disabled="disabled">
+                            <a class="next btn">Volgende</a>
+                            <select class="pagesize">
+                                <option value="10" selected="selected">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                            </select>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane <?php if ($this->activeTab == 'te') { ?>active<?php } ?>" id="teacher">
+                <table id="teacherTable" class="table table-striped tablesorter">
+                    <thead>
+                        <tr>
+                            <th><i class="icon-exclamation-sign"></i></th>
+                            <th>Vakleerkracht</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($this->teachers as $teacher) { ?>
+                            <tr>
+                                <td class="iconsSmall"><?php echo ($teacher[2] ? '<i class="icon-exclamation-sign"></i>' : $teacher[2] ) ?></td>
+                                <td><?php echo htmlentities($teacher[1]); ?></td>
+                                <td class="iconsSmall"><a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-edit', 'teid' => $teacher[0]), null, true); ?>"<i class="icon-edit"><span class="tooltip" data-original-title="Agenda beheren"></span></i></a></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <div id="pagerteacher" class="pager">
+                    <form action="<?php $this->url(array('controller' => 'Admin', 'action' => 'appointment')) ?>" method="post">
+                        <p>
+                            <a class="prev btn">Vorige</a>
+                            <input class="pagedisplay" type="text" disabled="disabled">
+                            <a class="next btn">Volgende</a>
+                            <select class="pagesize">
+                                <option value="10" selected="selected">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                            </select>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

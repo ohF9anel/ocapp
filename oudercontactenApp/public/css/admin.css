@@ -1,0 +1,79 @@
+#content .screen {
+    width: 340px;
+    min-height: 250px;
+    padding: 25px;
+    margin: 50px auto;
+    border: 2px #222 solid;
+    border-radius: 15px;
+}
+
+dl {
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+dt {
+    float: left;
+    clear: both;
+}
+
+dd {
+    margin-left: 100px;
+    margin-bottom: 7px;
+}
+
+dd input, dd select {
+    margin: 0;
+}
+
+td.hours {
+    width: 60px;
+}
+
+.settings {
+    display: none;
+}
+
+select.large {
+    width: 350px;
+}
+
+form.large dd {
+    margin-left: 230px;
+}
+
+form.large dd input {
+    width: 300px;
+}
+
+form.large dd input[type="checkbox"] {
+    width: 10px;
+}
+
+td.icons {
+    width: 40px;
+}
+
+td.iconsSmall {
+    width: 20px;
+}
+
+td.function {
+    width: 250px;
+}
+
+span.label {
+    display: inline-block;
+    margin-top: -4px;
+    margin-right: 3px;
+}
+
+.justify {
+    text-align: justify;
+}
+
+form.large input.group {
+    margin-right: 5px;
+}

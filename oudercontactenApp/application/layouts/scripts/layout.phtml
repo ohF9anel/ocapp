@@ -1,0 +1,122 @@
+<?php
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+    $this->headTitle()->setSeparator(' - ');
+    $this->headTitle('DBZ Oudercontacten');
+    echo $this->doctype(); 
+?>
+<html lang="nl">
+    <head>
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headTitle(); ?>
+        <?php 
+        $this->headLink()->prependStylesheet($this->baseUrl().'/css/general.css')
+            ->prependStylesheet($this->baseUrl().'/css/datepicker.css')
+            ->prependStylesheet($this->baseUrl().'/css/bootstrap-responsive.css')
+            ->prependStylesheet($this->baseUrl().'/css/bootstrap-responsive.min.css')
+            ->prependStylesheet($this->baseUrl().'/css/bootstrap.css')
+            ->prependStylesheet($this->baseUrl().'/css/bootstrap.min.css');
+        echo $this->headLink();
+        $this->headScript()->prependFile($this->baseUrl(). '/js/general.js')
+                ->prependFile($this->baseUrl(). '/js/tablesorter.pager.js')
+                ->prependFile($this->baseUrl(). '/js/tablesorter.js')
+                ->prependFile($this->baseUrl() . '/js/bootstrap-datepicker.js')
+                ->prependFile($this->baseUrl().'/js/bootstrap.js')
+                ->prependFile($this->baseUrl().'/js/bootstrap.min.js')
+                ->prependFile($this->baseUrl().'/js/jquery.js')
+                ->prependFile('http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js');
+        echo $this->headScript();
+        ?>
+
+    </head>
+    <body>
+        <div class="wrapper">
+            <div id="header">
+                <div class="centrate">
+                    <h1><a href="<?php echo $this->url(array('controller' => $this->controller), null, true); ?>">DBZ - Oudercontact</a></h1>
+                    <img src="<?php echo dirname($_SERVER['PHP_SELF']) ?>/img/logo_print.png" class="printOnly" alt="logo DBZ" />
+                    <?php if ($this->user != null) { ?>
+                        <p class="user">Welkom, <?php echo htmlentities($this->user) ?></p>
+                    <?php } ?>
+                </div>
+
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <?php if (!$this->noSidebar) { ?>
+                                <ul class="nav">
+                                    <?php switch ($this->controller) {
+                                        case 'Parent': ?>
+                                            <li <?php if($this->homeActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'index'), null, true); ?>" >Home</a></li>
+                                            <?php if($this->conferencesAvailable) { ?>
+                                                <li <?php if($this->appointmentActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'appointment'), null, true); ?>" >Afspraken</a></li>
+                                            <?php } 
+                                            break;
+                                        case 'Teacher': ?>
+                                                <li <?php if($this->homeActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Teacher', 'action' => 'index'), null, true); ?>" >Home</a></li>
+                                                <?php if ($this->conferencesAvailable) { ?>
+                                                    <?php if ($this->titularConference) { ?>
+                                                        <li <?php if($this->titularActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Teacher', 'action' => 'appointment', 'tiid' => $this->staffId), null, true); ?>">Klassenleraar</a></li>
+                                                    <?php } ?>
+                                                    <?php if ($this->teacherConference) { ?>
+                                                        <li <?php if($this->teacherActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Teacher', 'action' => 'appointment', 'teid' => $this->staffId), null, true); ?>">Vakleerkracht</a></li>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                        <?php break;
+                                        case 'Admin': ?>
+                                                <li <?php if($this->homeActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'index'), null, true); ?>" >Home</a></li>
+                                                <?php if ($this->conferencesAvailable) { ?>
+                                                    <li <?php if($this->appointmentActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment'), null, true); ?>">Planning</a></li>
+                                                <?php } ?>
+                                                <?php if ($this->rights) { ?>
+                                                    <li <?php if($this->administerActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'administer'), null, true); ?>">Rechtenbeheer</a></li>
+                                                    <li <?php if($this->newActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'new'), null, true); ?>">Nieuw oudercontact</a></li>
+                                                    <li <?php if($this->updateActive) echo 'class="active"'; ?>><a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update'), null, true); ?>">Data update</a></li>
+                                                <?php } ?>
+                                        <?php break;
+                                    } ?>
+                                </ul>
+                            <?php } ?>
+                            <ul class="nav pull-right">
+                                <li><a href="mailto:ict@dbz.be" class="support" >Probleem</a></li>
+                                <?php if($this->displayLogout) { ?><li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'logout'), null, true); ?>">logout</a></li><?php } ?>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="centrate">
+                <?php if (!$this->noSidebar) {?>
+                    <?php echo $this->noSidebar?>
+                    <div id="sidebar">
+                        <div id="conferences">
+                            <h3>Oudercontacten</h3>
+                            <?php if ($this->conferencesAvailable) { ?>
+                                <ul>
+                                    <?php foreach ($this->conferences as $conference) { ?>
+                                        <li <?php if ($this->activeConference == $conference['conferenceId']) echo 'class = "active" ' ?>><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => $this->action, 'conference' => $conference['conferenceId']), null, true) ?>" ><?php echo htmlentities($conference['name']) ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php } ?>
+
+                <div id="content">
+                    <?php echo $this->layout()->content; ?>
+                </div>
+            </div>
+            <div class="push"></div>
+        </div>
+        
+        <div class="footer">
+            <p>
+                <strong><a href="http://www.dbz.be/">Don Boscocollege Zwijnaarde</a></strong><br />
+                Grotesteenweg-Noord 113<br />
+                B 9052 Zwijnaarde<br />
+                09 221 46 48
+            </p>
+        </div>
+    </body>
+</html>
