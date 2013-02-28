@@ -35,7 +35,7 @@
                     <h1><a href="<?php echo $this->url(array('controller' => $this->controller), null, true); ?>">DBZ - Oudercontact</a></h1>
                     <img src="<?php echo dirname($_SERVER['PHP_SELF']) ?>/img/logo_print.png" class="printOnly" alt="logo DBZ" />
                     <?php if ($this->user != null) { ?>
-                        <p class="user">Welkom, <?php echo htmlentities($this->user) ?></p>
+                        <p class="user">Welkom, <?php echo htmlentities($this->user, ENT_NOQUOTES, 'utf-8') ?></p>
                     <?php } ?>
                 </div>
 
@@ -95,7 +95,7 @@
                             <?php if ($this->conferencesAvailable) { ?>
                                 <ul>
                                     <?php foreach ($this->conferences as $conference) { ?>
-                                        <li <?php if ($this->activeConference == $conference['conferenceId']) echo 'class = "active" ' ?>><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => $this->action, 'conference' => $conference['conferenceId']), null, true) ?>" ><?php echo htmlentities($conference['name']) ?></a></li>
+                                        <li <?php if ($this->activeConference == $conference['conferenceId']) echo 'class = "active" ' ?>><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => $this->action, 'conference' => $conference['conferenceId']), null, true) ?>" ><?php echo htmlentities($conference['name'], ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8') ?></a></li>
                                     <?php } ?>
                                 </ul>
                             <?php } ?>
