@@ -95,7 +95,11 @@
                             <?php if ($this->conferencesAvailable) { ?>
                                 <ul>
                                     <?php foreach ($this->conferences as $conference) { ?>
-                                        <li <?php if ($this->activeConference == $conference['conferenceId']) echo 'class = "active" ' ?>><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => $this->action, 'conference' => $conference['conferenceId']), null, true) ?>" ><?php echo htmlentities($conference['name'], ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8') ?></a></li>
+                                        <li <?php if ($this->activeConference == $conference['conferenceId']) echo 'class = "active" ' ?>>
+                                          <a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => $this->action, 'conference' => $conference['conferenceId']), null, true) ?>" >
+                                            <?php echo htmlentities($conference['name'], ENT_NOQUOTES, 'utf-8') ?>
+                                          </a>
+                                        </li>
                                     <?php } ?>
                                 </ul>
                             <?php } ?>
