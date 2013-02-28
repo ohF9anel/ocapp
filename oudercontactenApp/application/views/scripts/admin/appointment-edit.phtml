@@ -6,8 +6,14 @@
       ': ' . htmlentities($this->name, ENT_NOQUOTES, 'utf-8'); ?>
   </h2>
   <p class="breadcrumb">
-    <a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">Home</a> 
-    &gt; <a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'appointment'), null, true) ?>">Planning</a> > <?php echo ($this->titular ? 'Klassenleraren' : 'Vakleerkrachten'); ?></p>
+    <a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">
+      Home
+    </a> 
+    &gt; <a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'appointment'), null, true) ?>">
+      Planning
+    </a> 
+    &gt; <?php echo ($this->titular ? 'Klassenleraren' : 'Vakleerkrachten'); ?>
+  </p>
   <div class="printOnly">
     <h2>Agenda <?php echo ($this->titular ? 'klassenleraar' : 'vakleerkracht') .
         ': ' . htmlentities($this->name, ENT_NOQUOTES, 'utf-8'); ?></h2>
@@ -98,7 +104,9 @@
             <dt><label>Aanwezig: </label></dt>
             <dd><input type="checkbox" 
                        name="present<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
-                       value="true" <?php echo ($day->isPresent() ? 'checked="checked"' : '') . ($day->isObligated() || !$this->settingsEnabled ? ' readonly="readonly"' : ''); ?>/>
+                       value="true" 
+                       <?php echo ($day->isPresent() ? 'checked="checked"' : '') . 
+                          ($day->isObligated() || !$this->settingsEnabled ? ' readonly="readonly"' : ''); ?>/>
             </dd>
             <dt><label>Lokaal:</label></dt>
             <dd>
@@ -180,7 +188,8 @@
                                 ($course!= null ? ' - ' . $course->getCourse() : '') . ')'; ?>
                         </td>
                         <td class="icons">
-                          <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-delete', 'appointmentId' => $appointment[$pointer]->getAppointmentId(), 'activeId' => $day->getDayId())); ?>" class="sure">
+                          <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-delete', 'appointmentId' => $appointment[$pointer]->getAppointmentId(), 'activeId' => $day->getDayId())); ?>" 
+                             class="sure">
                             <i class="icon-trash">
                               <span class="tooltip" 
                                     data-original-title="Afspraak verwijderen">                                
@@ -193,7 +202,8 @@
                       else { ?>
                         <td class="larger">Pauze</td>
                         <td class="icons">
-                          <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-delete', 'appointmentId' => $appointment[$pointer]->getAppointmentId(), 'activeId' => $day->getDayId())); ?>" class="sure">
+                          <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-delete', 'appointmentId' => $appointment[$pointer]->getAppointmentId(), 'activeId' => $day->getDayId())); ?>" 
+                             class="sure">
                             <i class="icon-trash"><span class="tooltip" data-original-title="Pauze verwijderen"></span></i></a>
                         </td>
                         <?php $pointer++;
