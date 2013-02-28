@@ -133,7 +133,8 @@ $this->headScript()->prependFile($this->baseUrl() . '/js/admin.new.js'); ?>
               <input type="text" 
                  id="txtName" 
                  name="txtName" 
-                 value="<?php echo htmlentities($this->valName, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /></dd>
+                 value="<?php echo htmlentities($this->valName, ENT_NOQUOTES, 'utf-8'); ?>" /></dd>
+            
             <dt><label for="txtStart1">Start inschrijving klassenleraren:</label></dt>
             <dd class="input-append date" 
               data-date="<?php echo htmlentities($this->valStart1a, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" 
@@ -141,7 +142,9 @@ $this->headScript()->prependFile($this->baseUrl() . '/js/admin.new.js'); ?>
               <input type="text" 
                  id="txtStart1" 
                  name="txtStart1" 
-                 value="<?php echo htmlentities($this->valStart1, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
+                 value="<?php echo htmlentities($this->valStart1, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" />
+              <span class="add-on"><i class="icon-th"></i></span></dd>
+            
             <dt><label for="txtStart2">Start inschrijving vakleerkrachten:</label></dt>
             <dd class="input-append date" 
               data-date="<?php echo htmlentities($this->valStart2a, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" 
@@ -149,7 +152,9 @@ $this->headScript()->prependFile($this->baseUrl() . '/js/admin.new.js'); ?>
               <input type="text" 
                  id="txtStart2" 
                  name="txtStart2" 
-                 value="<?php echo htmlentities($this->valStart2, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
+                 value="<?php echo htmlentities($this->valStart2, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" />
+              <span class="add-on"><i class="icon-th"></i></span></dd>
+            
             <dt><label for="txtDeadline1">Deadline inschrijving klassenleraren:</label></dt>
             <dd class="input-append date" 
               data-date="<?php echo htmlentities($this->valDeadline1a, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" 
@@ -157,7 +162,9 @@ $this->headScript()->prependFile($this->baseUrl() . '/js/admin.new.js'); ?>
               <input type="text" 
                  id="txtDeadline1" 
                  name="txtDeadline1" 
-                 value="<?php echo htmlentities($this->valDeadline1, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
+                 value="<?php echo htmlentities($this->valDeadline1, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" />
+              <span class="add-on"><i class="icon-th"></i></span></dd>
+            
             <dt><label for="txtDeadline2">Deadline inschrijving vakleerkrachten:</label></dt>
             <dd class="input-append date" 
               data-date="<?php echo htmlentities($this->valDeadline2a, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" 
@@ -165,104 +172,142 @@ $this->headScript()->prependFile($this->baseUrl() . '/js/admin.new.js'); ?>
               <input type="text" 
                  id="txtDeadline2" 
                  name="txtDeadline2" 
-                 value="<?php echo htmlentities($this->valDeadline2, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
+                 value="<?php echo htmlentities($this->valDeadline2, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" />
+              <span class="add-on"><i class="icon-th"></i></span></dd>
+            
             <dt><label for="txtDays1">Contactdagen klassenleraren:</label></dt>
             <dd>
               <input type="text" 
                  id="txtDays1" 
                  name="txtDays1" 
-                 value="<?php echo htmlentities($this->valDays1, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> (aantal)</dd>
+                 value="<?php echo htmlentities($this->valDays1, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> 
+              (aantal)</dd>
+            
             <dt><label for="txtDays2">Contactdagen vakleerkrachten:</label></dt>
             <dd>
               <input type="text" 
                  id="txtDays2" 
                  name="txtDays2" 
-                 value="<?php echo htmlentities($this->valDays2, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> (aantal)</dd>
+                 value="<?php echo htmlentities($this->valDays2, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> 
+              (aantal)</dd>
+            
             <dt><label for="txtTimeslotLength1">Lengte tijdslots klassenleraren:</label></dt>
             <dd>
               <input type="text" 
                  id="txtTimeslotLength1" 
                  name="txtTimeslotLength1" 
-                 value="<?php echo htmlentities($this->valTimeslotLength1, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> (in minuten)</dd>
+                 value="<?php echo htmlentities($this->valTimeslotLength1, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> 
+              (in minuten)</dd>
+            
             <dt><label for="txtTimeslotLength2">Lengte tijdslots vakleerkrachten:</label></dt>
             <dd>
               <input type="text" 
                  id="txtTimeslotLength2" 
                  name="txtTimeslotLength2" 
-                 value="<?php echo htmlentities($this->valTimeslotLength2, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> (in minuten)</dd>
+                 value="<?php echo htmlentities($this->valTimeslotLength2, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> 
+              (in minuten)</dd>
+            
             <dt><label for="txtMeantime">Tussentijd:</label></dt>
             <dd>
               <input type="text" 
                  id="txtMeantime" 
                  name="txtMeantime" 
-                 value="<?php echo htmlentities($this->valMeantime, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> (in minuten)</dd>
+                 value="<?php echo htmlentities($this->valMeantime, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8'); ?>" /> 
+              (in minuten)</dd>
           </dl>
-        <?php break;
+        
+      <?php break;
         case 2: ?>
           <dl>
             <dt><h3>Oudercontact met klassenleraren</h3></dt>
             <dd><h3>&nbsp;</h3></dd>
+            
             <?php foreach ($this->days1 as $day1) { ?>
-              <dt><h4>Contactdag <?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')); ?>:</h4></dt>
+              <dt><h4>Contactdag <?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8'); ?>:</h4></dt>
               <dd><h4>&nbsp;</h4></dd>
-              <dt><label for="txtDay<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>">Datum:</label></dt>
+            
+              <dt><label for="txtDay<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+                Datum:</label></dt>
               <dd class="input-append date" 
-                data-date="<?php echo ($day1->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day1->getDate(, ENT_NOQUOTES, 'utf-8'))), ENT_NOQUOTES, 'utf-8') : Date('d-m-Y')); ?>" 
+                data-date="<?php echo ($day1->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day1->getDate())), ENT_NOQUOTES, 'utf-8') : Date('d-m-Y')); ?>" 
                 data-date-format="dd-mm-yyyy">
                 <input 
                 type="text" 
-                id="txtDay<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
-                name="txtDay<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
-                                                                                                    value="<?php echo ($day1->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day1->getDate(, ENT_NOQUOTES, 'utf-8')))) : ''); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
-              <dt><label for="chbObligated<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>">Verplichte aanwezigheid:</label></dt>
+                id="txtDay<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                name="txtDay<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                value="<?php echo ($day1->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day1->getDate())), ENT_NOQUOTES, 'utf-8') : ''); ?>" />
+                <span class="add-on"><i class="icon-th"></i></span></dd>
+              
+              <dt>
+              <label for="chbObligated<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+                Verplichte aanwezigheid:</label></dt>
               <dd><input type="checkbox" 
-                     id="chbObligated<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>" 
-                     name="chbObligated<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
+                     id="chbObligated<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                     name="chbObligated<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
                      <?php echo ($day1->getIsPrimary() ? 'checked="checked"' : '') ?> 
                      value="true" /></dd>
-              <dt><label for="txtStart<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>">Starttijd:</label></dt>
+              
+              <dt><label for="txtStart<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+                Starttijd:</label></dt>
               <dd><input type="text" 
-                     id ="txtStart<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>" 
-                     name="txtStart<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
-                     value="<?php echo ($day1->getStartTime() != null ? htmlentities(Date('H:i', strtotime($day1->getStartTime(, ENT_NOQUOTES, 'utf-8'))), ENT_NOQUOTES, 'utf-8') : ''); ?>" /> (hh:mm)</dd>
-              <dt><label for="txtEnd<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>">Eindtijd:</label></dt>
+                     id ="txtStart<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                     name="txtStart<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                     value="<?php echo ($day1->getStartTime() != null ? htmlentities(Date('H:i', strtotime($day1->getStartTime())), ENT_NOQUOTES, 'utf-8') : ''); ?>" /> 
+                (hh:mm)</dd>
+              
+              <dt><label for="txtEnd<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+                Eindtijd:</label></dt>
               <dd><input type="text" 
-                     id ="txtEnd<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>" 
-                     name="txtEnd<?php echo htmlentities($day1->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
-                     value="<?php echo ($day1->getEndTime() != null ? htmlentities(Date('H:i', strtotime($day1->getEndTime(, ENT_NOQUOTES, 'utf-8'))), ENT_NOQUOTES, 'utf-8') : ''); ?>" /> (hh:mm)</dd>
+                     id ="txtEnd<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                     name="txtEnd<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                     value="<?php echo ($day1->getEndTime() != null ? htmlentities(Date('H:i', strtotime($day1->getEndTime())), ENT_NOQUOTES, 'utf-8') : ''); ?>" /> 
+                (hh:mm)</dd>
             <?php } ?>
+            
             <dt><h3>Oudercontact met vakleerkrachten</h3></dt>
             <dd><h3>&nbsp;</h3></dd>
+            
             <?php foreach ($this->days2 as $day2) { ?>
-              <dt><h4>Contactdag <?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')); ?>:</h4></dt>
+              <dt><h4>Contactdag <?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8'); ?>:</h4></dt>
               <dd><h4>&nbsp;</h4></dd>
-              <dt><label for="txtDay<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>">Datum:</label></dt>
+            
+              <dt><label for="txtDay<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+                Datum:</label></dt>
               <dd class="input-append date" 
-                data-date="<?php echo ($day2->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day2->getDate(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')))) : Date('d-m-Y')); ?>" 
+                data-date="<?php echo ($day2->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day2->getDate())), ENT_NOQUOTES, 'utf-8') : Date('d-m-Y')); ?>" 
                 data-date-format="dd-mm-yyyy">
                 <input type="text" 
-                   id="txtDay<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
-                   name="txtDay<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
-                   value="<?php echo ($day2->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day2->getDate(, ENT_NOQUOTES, 'utf-8'))), ENT_NOQUOTES, 'utf-8') : ''); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
-              <dt><label for="chbObligated<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>">Verplichte aanwezigheid:</label></dt>
+                   id="txtDay<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   name="txtDay<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   value="<?php echo ($day2->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day2->getDate())), ENT_NOQUOTES, 'utf-8') : ''); ?>" />
+                <span class="add-on"><i class="icon-th"></i></span></dd>
+              
+              <dt><label for="chbObligated<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+                Verplichte aanwezigheid:</label></dt>
               <dd>
                 <input type="checkbox" 
-                   id="chbObligated<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>" 
-                   name="chbObligated<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
+                   id="chbObligated<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   name="chbObligated<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
                    <?php echo ($day2->getIsPrimary() ? 'checked="checked"' : '') ?> 
                    value="true" /></dd>
-              <dt><label for="txtStart<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>">Starttijd:</label></dt>
+              
+              <dt><label for="txtStart<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+                Starttijd:</label></dt>
               <dd>
                 <input type="text" 
-                   id ="txtStart<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>" 
-                   name="txtStart<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
-                   value="<?php echo ($day2->getStartTime() != null ? htmlentities(Date('H:i', strtotime($day2->getStartTime(, ENT_NOQUOTES, 'utf-8'))), ENT_NOQUOTES, 'utf-8') : ''); ?>" /> (hh:mm)</dd>
-              <dt><label for="txtEnd<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>">Eindtijd:</label></dt>
+                   id ="txtStart<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   name="txtStart<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   value="<?php echo ($day2->getStartTime() != null ? htmlentities(Date('H:i', strtotime($day2->getStartTime())), ENT_NOQUOTES, 'utf-8') : ''); ?>" /> 
+                (hh:mm)</dd>
+              
+              <dt><label for="txtEnd<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+                Eindtijd:</label></dt>
               <dd>
                 <input type="text" 
-                   id ="txtEnd<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8')) ?>" 
-                   name="txtEnd<?php echo htmlentities($day2->getConferenceDayId(, ENT_NOQUOTES, 'utf-8'), ENT_NOQUOTES, 'utf-8') ?>" 
-                   value="<?php echo ($day2->getEndTime() != null ? htmlentities(Date('H:i', strtotime($day2->getEndTime(, ENT_NOQUOTES, 'utf-8'))), ENT_NOQUOTES, 'utf-8') : ''); ?>" /> (hh:mm)</dd>
+                   id ="txtEnd<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   name="txtEnd<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   value="<?php echo ($day2->getEndTime() != null ? htmlentities(Date('H:i', strtotime($day2->getEndTime())), ENT_NOQUOTES, 'utf-8') : ''); ?>" /> 
+                (hh:mm)</dd>
             <?php } ?>
           </dl>
         <?php break;
@@ -274,16 +319,18 @@ $this->headScript()->prependFile($this->baseUrl() . '/js/admin.new.js'); ?>
                 <input type="checkbox" 
                      class="float group" 
                      name="participants[]" 
-                     value="<?php echo htmlentities($id, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8') ?>" /> <?php echo htmlentities($group, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8') ?>
+                     value="<?php echo htmlentities($id, ENT_NOQUOTES, 'utf-8') ?>" /> 
+                     <?php echo htmlentities($group, ENT_NOQUOTES, 'utf-8') ?>
                 </label></dd>
             <?php } ?>
           </dl>
         <?php
         break;
       } ?>
+      
       <input type="hidden" 
            name="step" 
-           value="<?php echo htmlentities($this->step, ENT_NOQUOTES, 'utf-8', ENT_NOQUOTES, 'utf-8') ?>" />
+           value="<?php echo htmlentities($this->step, ENT_NOQUOTES, 'utf-8') ?>" />
       <input type="submit" 
            class="btn btn-primary" 
            name="btnSave" 
@@ -297,7 +344,15 @@ $this->headScript()->prependFile($this->baseUrl() . '/js/admin.new.js'); ?>
     <div class="alert alert-info">
       <p>U heeft onvoldoende rechten om oudercontacten aan te maken, 
         u kunt echter wel de 
-        <a href="<?php echo htmlentities($this->url(array('controller' => 'admin', 'action' => 'appointment', ENT_NOQUOTES, 'utf-8'), null, true), ENT_NOQUOTES, 'utf-8') ?>">planning bekijken</a> van bestaande oudercontacten en hier de nodige acties uitvoeren.</p>
+        <a href="<?php echo htmlentities($this->url(
+                array(
+                    'controller' => 'admin', 
+                    'action' => 'appointment'
+                    ), 
+                null, true), ENT_NOQUOTES, 'utf-8') ?>">
+          planning bekijken
+        </a> 
+        van bestaande oudercontacten en hier de nodige acties uitvoeren.</p>
     </div>
   <?php }?>
 </div>
