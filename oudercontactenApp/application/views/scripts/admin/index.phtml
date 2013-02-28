@@ -2,168 +2,331 @@
 
 
 <div class="center">
-    <?php if ($this->conferencesAvailable) { ?>
-        <h2><?php echo htmlentities($this->conference->getName()) ?></h2>
-        <p class="breadcrumb">Home</p>
-        <?php if($this->succes) { ?>
-            <div class="alert alert-info">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p>De wijzigingen werden bewaard.</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errName) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve een naam voor dit oudercontact in te vullen.</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errStart1) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve een startdatum voor de inschrijvingen van het oudercontact met klassenleraren in te vullen, dit in het juiste formaat (dd-mm-yyyy).</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errStart2) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve een startdatum voor de inschrijvingen van het oudercontact met de vakleerkrachten in te vullen, dit in het juiste formaat (dd-mm-yyyy).</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errDeadline1) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve een einddatum voor de inschrijvingen van het oudercontact met de klassenleraren in te vullen, dit in het juiste formaat (dd-mm-yyyy).</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errDeadline2) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve een einddatum voor de inschrijvingen van het oudercontact met de vakleerkrachten in te vullen, dit in het juiste formaat (dd-mm-yyyy).</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errTimeslotLength1) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve de lengte van de tijdslot in te vullen voor het oudercontact met de klassenleraren, dit in minuten.</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errTimeslotLength2) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve de lengte van de tijdslot in te vullen voor het oudercontact met de vakleerkrachten, dit in minuten.</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errMeantime) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve de minimale wachttijd tussen twee opeenvolgende afspraken in te vullen, dit in minuten.</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errDay) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve alle data in te vullen voor alle contactdagen, dit in het juiste formaat (dd-mm-yyyy).</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errStart) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve de starttijden in te vullen voor alle contactdagen, dit in het juiste formaat (hh:mm).</p>
-            </div>
-        <?php } ?>
-        <?php if($this->errEnd) { ?>
-            <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">&times;</a>
-                <p><strong>Oeps!</strong> Gelieve de eindtijden in te vullen voor alle contactdagen, dit in het juiste formaat (hh:mm).</p>
-            </div>
-        <?php } ?>
-        <?php if ($this->accessebilityLevel == 1) { ?>
-            <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'index'), null, true) ?>" method="post" class="large">
-                <dl>
-                    <dt><label for="txtName">Naam:</label></dt>
-                    <dd><input type="text" id="txtName" name="txtName" value="<?php echo htmlentities($this->conference->getName()); ?>" /></dd>
-                    <dt><label for="txtStart1">Start inschrijving klassenleraren:</label></dt>
-                    <dd class="input-append date" data-date="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getStartSubscription1()))); ?>" data-date-format="dd-mm-yyyy"><input type="text" id="txtStart1" name="txtStart1" value="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getStartSubscription1()))); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
-                    <dt><label for="txtStart2">Start inschrijving vakleerkrachten:</label></dt>
-                    <dd class="input-append date" data-date="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getStartSubscription2()))); ?>" data-date-format="dd-mm-yyyy"><input type="text" id="txtStart2" name="txtStart2" value="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getStartSubscription2()))); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
-                    <dt><label for="txtDeadline1">Deadline inschrijving klassenleraren:</label></dt>
-                    <dd class="input-append date" data-date="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getDeadlineSubscription1()))); ?>" data-date-format="dd-mm-yyyy"><input type="text" id="txtDeadline1" name="txtDeadline1" value="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getDeadlineSubscription1()))); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
-                    <dt><label for="txtDeadline2">Deadline inschrijving vakleerkrachten:</label></dt>
-                    <dd class="input-append date" data-date="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getDeadlineSubscription2()))); ?>" data-date-format="dd-mm-yyyy"><input type="text" id="txtDeadline2" name="txtDeadline2" value="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getDeadlineSubscription2()))); ?>" /><span class="add-on"><i class="icon-th"></i></span></dd>
-                    <dt><label for="txtTimeslotLength1">Lengte tijdslots klassenleraren:</label></dt>
-                    <dd><input type="text" id="txtTimeslotLength1" name="txtTimeslotLength1" value="<?php echo htmlentities($this->conference->getTimeLength1()); ?>" <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> /> (in minuten)</dd>
-                    <dt><label for="txtTimeslotLength2">Lengte tijdslots vakleerkrachten:</label></dt>
-                    <dd><input type="text" id="txtTimeslotLength2" name="txtTimeslotLength2" value="<?php echo htmlentities($this->conference->getTimeLength2()); ?>" <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> /> (in minuten)</dd>
-                    <dt><label for="txtMeantime">Tussentijd:</label></dt>
-                    <dd><input type="text" id="txtMeantime" name="txtMeantime" value="<?php echo htmlentities($this->conference->getMinimalMeantime()); ?>" /> (in minuten)</dd>
-                    <dt><h3>Contactdagen oudercontact met klassenleraren</h3></dt>
-                    <dd><h3>&nbsp;</h3></dd>
-                    <?php foreach ($this->days1 as $day1) { ?>
-                        <dt><label for="txtDay<?php echo htmlentities($day1->getConferenceDayId()) ?>">Datum:</label></dt>
-                        <dd class="input-append date" data-date="<?php echo ($day1->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day1->getDate()))) : ''); ?>" data-date-format="dd-mm-yyyy"><input type="text" id="txtDay<?php echo htmlentities($day1->getConferenceDayId()) ?>" name="txtDay<?php echo htmlentities($day1->getConferenceDayId()) ?>" value="<?php echo ($day1->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day1->getDate()))) : ''); ?>" <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> /><span class="add-on"><i class="icon-th"></i></span></dd>
-                        <dt><label for="chbObligated<?php echo htmlentities($day1->getConferenceDayId()) ?>">Verplichte aanwezigheid:</label></dt>
-                        <dd><input type="checkbox" id="chbObligated<?php echo htmlentities($day1->getConferenceDayId()) ?>" name="chbObligated<?php echo htmlentities($day1->getConferenceDayId()) ?>" <?php echo ($day1->getIsPrimary() ? 'checked="checked"' : '') ?> value="true" <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> /></dd>
-                        <dt><label for="txtStarttime<?php echo htmlentities($day1->getConferenceDayId()) ?>">Starttijd:</label></dt>
-                        <dd><input type="text" id ="txtStarttime<?php echo htmlentities($day1->getConferenceDayId()) ?>" name="txtStarttime<?php echo htmlentities($day1->getConferenceDayId()) ?>" value="<?php echo ($day1->getStartTime() != null ? htmlentities(Date('H:i', strtotime($day1->getStartTime()))) : ''); ?>" <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> /> (hh:mm)</dd>
-                        <dt><label for="txtEndtime<?php echo htmlentities($day1->getConferenceDayId()) ?>">Eindtijd:</label></dt>
-                        <dd><input type="text" id ="txtEndtime<?php echo htmlentities($day1->getConferenceDayId()) ?>" name="txtEndtime<?php echo htmlentities($day1->getConferenceDayId()) ?>" value="<?php echo ($day1->getEndTime() != null ? htmlentities(Date('H:i', strtotime($day1->getEndTime()))) : ''); ?>" <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> /> (hh:mm)</dd>
-                        <dt>&nbsp;</dt>
-                        <dd>&nbsp;</dd>
-                    <?php } ?>
-                    <dt><h3>Contactdagen oudercontact met vakleerkrachten</h3></dt>
-                    <dd><h3>&nbsp;</h3></dd>
-                    <?php foreach ($this->days2 as $day2) { ?>
-                        <dt><label for="txtDay<?php echo htmlentities($day2->getConferenceDayId()) ?>">Datum:</label></dt>
-                        <dd class="input-append date" data-date="<?php echo ($day2->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day2->getDate()))) : ''); ?>" data-date-format="dd-mm-yyyy"><input type="text" id="txtDay<?php echo htmlentities($day2->getConferenceDayId()) ?>" name="txtDay<?php echo htmlentities($day2->getConferenceDayId()) ?>" value="<?php echo ($day2->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day2->getDate()))) : ''); ?>" <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> /><span class="add-on"><i class="icon-th"></i></span></dd>
-                        <dt><label for="chbObligated<?php echo htmlentities($day2->getConferenceDayId()) ?>">Verplichte aanwezigheid:</label></dt>
-                        <dd><input type="checkbox" id="chbObligated<?php echo htmlentities($day2->getConferenceDayId()) ?>" name="chbObligated<?php echo htmlentities($day2->getConferenceDayId()) ?>" <?php echo ($day2->getIsPrimary() ? 'checked="checked"' : '') ?> value="true" <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> /></dd>
-                        <dt><label for="txtStarttime<?php echo htmlentities($day2->getConferenceDayId()) ?>">Starttijd:</label></dt>
-                        <dd><input type="text" id ="txtStarttime<?php echo htmlentities($day2->getConferenceDayId()) ?>" name="txtStarttime<?php echo htmlentities($day2->getConferenceDayId()) ?>" value="<?php echo ($day2->getStartTime() != null ? htmlentities(Date('H:i', strtotime($day2->getStartTime()))) : ''); ?>" <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> /> (hh:mm)</dd>
-                        <dt><label for="txtEndtime<?php echo htmlentities($day2->getConferenceDayId()) ?>">Eindtijd:</label></dt>
-                        <dd><input type="text" id ="txtEndtime<?php echo htmlentities($day2->getConferenceDayId()) ?>" name="txtEndtime<?php echo htmlentities($day2->getConferenceDayId()) ?>" value="<?php echo ($day2->getEndTime() != null ? htmlentities(Date('H:i', strtotime($day2->getEndTime()))) : ''); ?>" <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> /> (hh:mm)</dd>
-                        <dt>&nbsp;</dt>
-                        <dd>&nbsp;</dd>
-                    <?php } ?>
-                </dl>
-                <input type="button" class="btn btn-primary" id="btnSave" name="btnSave" value="Wijzigen" />
-                <input type="button" class="btn btn-danger" id="btnDelete" name="btnDelete" value="Verwijderen" />
-                <div class="modal" id="confirmDelete">
-                    <div class="modal-header">
-                        <button class="close" data-dismiss="modal">&times;</button>
-                        <h4>Oudercontact verwijderen</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>U heeft aangegeven dat u het oudercontact: &quot;<?php echo htmlentities($this->conference->getName()) ?>&quot; wilt verwijderen.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-danger" name="btnDelete" value="Verwijderen" />
-                        <input type="button" class="btn btnCancel" value="Annuleren" />
-                    </div>
-                </div>
-                <div class="modal" id="confirmChange">
-                    <div class="modal-header">
-                        <button class="close" data-dismiss="modal">&times;</button>
-                        <h4>Oudercontact wijzigen</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>U heeft aangegeven dat u het oudercontact: &quot;<?php echo htmlentities($this->conference->getName()) ?>&quot; wilt wijzigen.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary" name="btnSave" value="Wijzigen" />
-                        <input type="button" class="btn btnCancel" value="Annuleren" />
-                    </div>
-                </div>
-            </form>
-        <?php } else { ?>
-            <div class="alert alert-info">
-                <p>U heeft onvoldoende rechten om de instellingen van dit oudercontact te wijzigen, u kunt echter wel de <a href="<?php echo htmlentities($this->url(array('controller' => 'admin', 'action' => 'appointment'), null, true)) ?>">planning bekijken</a> en hier de nodige acties uitvoeren.</p>
-            </div>
-        <?php } ?>
-    <?php } else { ?>
-        <h2>Oudercontacten</h2>
-        <p class="breadcrumb">Home</p>
-        <div class="alert alert-info">
-            <p>Er zijn momenteel geen oudercontacten, u kunt een <a href="<?php echo htmlentities($this->url(array('controller' => 'Admin', 'action' => 'new'), null, true)) ?>">oudercontact toevoegen</a> als u over voldoende rechten beschikt.</p>
-        </div>
+  <?php if ($this->conferencesAvailable) { ?>
+    <h2><?php echo htmlentities($this->conference->getName(), ENT_NOQUOTES, 'utf-8') ?></h2>
+    <p class="breadcrumb">Home</p>
+    <?php if($this->succes) { ?>
+      <div class="alert alert-info">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p>De wijzigingen werden bewaard.</p>
+      </div>
     <?php } ?>
+    <?php if($this->errName) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve een naam voor dit oudercontact in te vullen.</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errStart1) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve een startdatum voor de inschrijvingen van het oudercontact 
+          met klassenleraren in te vullen, 
+          dit in het juiste formaat (dd-mm-yyyy).</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errStart2) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve een startdatum voor de inschrijvingen van het oudercontact 
+          met de vakleerkrachten in te vullen, 
+          dit in het juiste formaat (dd-mm-yyyy).</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errDeadline1) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve een einddatum voor de inschrijvingen van het oudercontact 
+          met de klassenleraren in te vullen, 
+          dit in het juiste formaat (dd-mm-yyyy).</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errDeadline2) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve een einddatum voor de inschrijvingen van het 
+          oudercontact met de vakleerkrachten in te vullen, 
+          dit in het juiste formaat (dd-mm-yyyy).</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errTimeslotLength1) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve de lengte van de tijdslot in te vullen voor het 
+          oudercontact met de klassenleraren, dit in minuten.</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errTimeslotLength2) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve de lengte van de tijdslot in te vullen voor het 
+          oudercontact met de vakleerkrachten, dit in minuten.</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errMeantime) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve de minimale wachttijd tussen twee opeenvolgende 
+          afspraken in te vullen, dit in minuten.</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errDay) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve alle data in te vullen voor alle contactdagen, 
+          dit in het juiste formaat (dd-mm-yyyy).</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errStart) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          dit in het juiste formaat (hh:mm).</p>
+      </div>
+    <?php } ?>
+    <?php if($this->errEnd) { ?>
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><strong>Oeps!</strong> 
+          Gelieve de eindtijden in te vullen voor alle contactdagen, 
+          dit in het juiste formaat (hh:mm).</p>
+      </div>
+    <?php } ?>
+    <?php if ($this->accessebilityLevel == 1) { ?>
+      <form 
+        action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'index'), null, true) ?>" 
+        method="post" 
+        class="large">
+        <dl>
+          <dt><label for="txtName">Naam:</label></dt>
+          <dd><input type="text" 
+                 id="txtName" 
+                 name="txtName" 
+                 value="<?php echo htmlentities($this->conference->getName(), ENT_NOQUOTES, 'utf-8'); ?>" /></dd>
+          
+          <dt><label for="txtStart1">Start inschrijving klassenleraren:</label></dt>
+          <dd class="input-append date" 
+              data-date="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getStartSubscription1())), ENT_NOQUOTES, 'utf-8'); ?>" 
+              data-date-format="dd-mm-yyyy">
+            <input type="text" 
+                   id="txtStart1" 
+                   name="txtStart1" 
+                   value="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getStartSubscription1())), ENT_NOQUOTES, 'utf-8'); ?>" />
+            <span class="add-on"><i class="icon-th"></i></span></dd>
+          
+          <dt><label for="txtStart2">Start inschrijving vakleerkrachten:</label></dt>
+          <dd class="input-append date" 
+            data-date="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getStartSubscription2())), ENT_NOQUOTES, 'utf-8'); ?>" 
+            data-date-format="dd-mm-yyyy">
+            <input type="text" 
+                   id="txtStart2" 
+                   name="txtStart2" 
+                   value="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getStartSubscription2())), ENT_NOQUOTES, 'utf-8'); ?>" />
+            <span class="add-on"><i class="icon-th"></i></span></dd>
+          
+          <dt><label for="txtDeadline1">Deadline inschrijving klassenleraren:</label></dt>
+          <dd class="input-append date" 
+            data-date="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getDeadlineSubscription1())), ENT_NOQUOTES, 'utf-8'); ?>" 
+            data-date-format="dd-mm-yyyy">
+            <input type="text" 
+                   id="txtDeadline1" 
+                   name="txtDeadline1" 
+                   value="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getDeadlineSubscription1())), ENT_NOQUOTES, 'utf-8'); ?>" />
+            <span class="add-on"><i class="icon-th"></i></span></dd>
+          
+          <dt><label for="txtDeadline2">Deadline inschrijving vakleerkrachten:</label></dt>
+          <dd class="input-append date" 
+            data-date="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getDeadlineSubscription2())), ENT_NOQUOTES, 'utf-8'); ?>" 
+            data-date-format="dd-mm-yyyy">
+            <input type="text" 
+                   id="txtDeadline2" 
+                   name="txtDeadline2" 
+                   value="<?php echo htmlentities(Date('d-m-Y', strtotime($this->conference->getDeadlineSubscription2())), ENT_NOQUOTES, 'utf-8'); ?>" />
+            <span class="add-on"><i class="icon-th"></i></span></dd>
+          
+          <dt><label for="txtTimeslotLength1">Lengte tijdslots klassenleraren:</label></dt>
+          <dd><input type="text" 
+                 id="txtTimeslotLength1" 
+                 name="txtTimeslotLength1" 
+                 value="<?php echo htmlentities($this->conference->getTimeLength1(), ENT_NOQUOTES, 'utf-8'); ?>" 
+                   <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> /> (in minuten)</dd>
+          
+          <dt><label for="txtTimeslotLength2">
+            Lengte tijdslots vakleerkrachten:</label></dt>
+          <dd><input type="text" 
+                 id="txtTimeslotLength2" 
+                 name="txtTimeslotLength2" 
+                 value="<?php echo htmlentities($this->conference->getTimeLength2(), ENT_NOQUOTES, 'utf-8'); ?>" 
+                   <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> /> (in minuten)</dd>
+          
+          <dt><label for="txtMeantime">Tussentijd:</label></dt>
+          <dd><input type="text" 
+                 id="txtMeantime" 
+                 name="txtMeantime" 
+                 value="<?php echo htmlentities($this->conference->getMinimalMeantime(), ENT_NOQUOTES, 'utf-8'); ?>" /> (in minuten)</dd>
+          
+          <dt><h3>Contactdagen oudercontact met klassenleraren</h3></dt>
+          <dd><h3>&nbsp;</h3></dd>
+          <?php foreach ($this->days1 as $day1) { ?>
+            
+          <dt><label 
+              for="txtDay<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">Datum:</label></dt>
+            <dd class="input-append date" 
+              data-date="<?php echo ($day1->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day1->getDate())), ENT_NOQUOTES, 'utf-8') : ''); ?>" 
+              data-date-format="dd-mm-yyyy">
+              <input type="text" 
+                     id="txtDay<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                     name="txtDay<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                     value="<?php echo ($day1->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day1->getDate())), ENT_NOQUOTES, 'utf-8') : ''); ?>" 
+                     <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> />
+                    <span class="add-on"><i class="icon-th"></i></span></dd>
+            
+            <dt><label 
+              for="chbObligated<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">Verplichte aanwezigheid:</label></dt>
+            <dd><input 
+              type="checkbox" 
+              id="chbObligated<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+              name="chbObligated<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+              <?php echo ($day1->getIsPrimary() ? 'checked="checked"' : '') ?> 
+              value="true" 
+              <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> /></dd>
+            
+            <dt><label for="txtStarttime<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">Starttijd:</label></dt>
+            <dd><input type="text" 
+                   id ="txtStarttime<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   name="txtStarttime<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   value="<?php echo ($day1->getStartTime() != null ? htmlentities(Date('H:i', strtotime($day1->getStartTime())), ENT_NOQUOTES, 'utf-8') : ''); ?>" 
+                   <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> /> 
+              (hh:mm)</dd>
+          
+            <dt><label for="txtEndtime<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">Eindtijd:</label></dt>
+            <dd><input type="text" 
+                   id ="txtEndtime<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   name="txtEndtime<?php echo htmlentities($day1->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                   value="<?php echo ($day1->getEndTime() != null ? htmlentities(Date('H:i', strtotime($day1->getEndTime())), ENT_NOQUOTES, 'utf-8') : ''); ?>" 
+                   <?php if ($this->titularDisabled) { ?>disabled="disabled"<?php } ?> /> 
+              (hh:mm)</dd>
+            
+            <dt>&nbsp;</dt> <!-- bedoeling?  -->
+            <dd>&nbsp;</dd>
+          <?php } ?>
+            
+          <dt><h3>Contactdagen oudercontact met vakleerkrachten</h3></dt>
+          
+          <dd><h3>&nbsp;</h3></dd> <!-- bedoeling? -->
+          <?php foreach ($this->days2 as $day2) { ?>
+            <dt><label for="txtDay<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+              Datum:</label>
+            </dt>
+            <dd class="input-append date" 
+                data-date="<?php echo ($day2->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day2->getDate())), ENT_NOQUOTES, 'utf-8') : ''); ?>" 
+                data-date-format="dd-mm-yyyy">
+              <input type="text" 
+                     id="txtDay<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                  name="txtDay<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                  value="<?php echo ($day2->getDate() != null ? htmlentities(Date('d-m-Y', strtotime($day2->getDate())), ENT_NOQUOTES, 'utf-8') : ''); ?>"
+                   <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> />
+                  <span class="add-on"><i class="icon-th"></i></span>
+            </dd>
+            
+            <dt><label for="chbObligated<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+              Verplichte aanwezigheid:</label></dt>
+            <dd><input type="checkbox" id="chbObligated<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       name="chbObligated<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       <?php echo ($day2->getIsPrimary() ? 'checked="checked"' : '') ?> 
+                       value="true" 
+                       <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> />
+            </dd>
+            
+            <dt><label for="txtStarttime<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+              Starttijd:</label></dt>
+            <dd><input type="text" 
+                       id ="txtStarttime<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       name="txtStarttime<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       value="<?php echo ($day2->getStartTime() != null ? htmlentities(Date('H:i', strtotime($day2->getStartTime())), ENT_NOQUOTES, 'utf-8') : ''); ?>" 
+                       <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> /> (hh:mm)</dd>
+            
+            <dt><label for="txtEndtime<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>">Eindtijd:</label></dt>
+            <dd><input type="text" 
+                       id="txtEndtime<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       name="txtEndtime<?php echo htmlentities($day2->getConferenceDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       value="<?php echo ($day2->getEndTime() != null ? htmlentities(Date('H:i', strtotime($day2->getEndTime())), ENT_NOQUOTES, 'utf-8') : ''); ?>" 
+                       <?php if ($this->teacherDisabled) { ?>disabled="disabled"<?php } ?> /> (hh:mm)</dd>
+            
+            <dt>&nbsp;</dt>
+            <dd>&nbsp;</dd>
+          <?php } ?>
+        </dl>
+        <input type="button" 
+               class="btn btn-primary" 
+               id="btnSave" name="btnSave" 
+               value="Wijzigen" />
+        <input type="button" 
+               class="btn btn-danger" 
+               id="btnDelete" 
+               name="btnDelete" 
+               value="Verwijderen" />
+        
+        <div class="modal" id="confirmDelete">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Oudercontact verwijderen</h4>
+          </div>
+          <div class="modal-body">
+            <p>U heeft aangegeven dat u het oudercontact: 
+              &quot;<?php echo htmlentities($this->conference->getName(), ENT_NOQUOTES, 'utf-8') ?>&quot; 
+              wilt verwijderen.</p>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" 
+                   class="btn btn-danger" 
+                   name="btnDelete" 
+                   value="Verwijderen" />
+            <input type="button" 
+                   class="btn btnCancel" 
+                   value="Annuleren" />
+          </div>
+        </div>
+        <div class="modal" id="confirmChange">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4>Oudercontact wijzigen</h4>
+          </div>
+          <div class="modal-body">
+            <p>U heeft aangegeven dat u het oudercontact: 
+              &quot;<?php echo htmlentities($this->conference->getName(), ENT_NOQUOTES, 'utf-8') ?>&quot; 
+              wilt wijzigen.</p>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" name="btnSave" value="Wijzigen" />
+            <input type="button" class="btn btnCancel" value="Annuleren" />
+          </div>
+        </div>
+      </form>
+    <?php } else { ?>
+      <div class="alert alert-info">
+        <p>U heeft onvoldoende rechten om de instellingen van dit oudercontact 
+          te wijzigen, u kunt echter wel de 
+          <a href="<?php echo htmlentities($this->url(array('controller' => 'admin', 'action' => 'appointment', ENT_NOQUOTES, 'utf-8'), null, true)) ?>">
+            planning bekijken</a> en hier de nodige acties uitvoeren.</p>
+      </div>
+    <?php } ?>
+  <?php } else { ?>
+    <h2>Oudercontacten</h2>
+    <p class="breadcrumb">Home</p>
+    <div class="alert alert-info">
+      <p>Er zijn momenteel geen oudercontacten, u kunt een 
+        <a href="<?php echo htmlentities($this->url(array('controller' => 'Admin', 'action' => 'new', ENT_NOQUOTES, 'utf-8'), null, true)) ?>">
+          oudercontact toevoegen</a> als u over voldoende rechten beschikt.</p>
+    </div>
+  <?php } ?>
 </div>
