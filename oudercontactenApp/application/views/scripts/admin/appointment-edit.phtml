@@ -108,39 +108,61 @@
                 <?php foreach ($day->getAvailableRooms() as $room) { ?>
                   <option value="<?php echo htmlentities($room->getRoomId(), ENT_NOQUOTES, 'utf-8') ?>" 
                     <?php if ($day->getRoomId() == $room->getRoomId()) echo 'selected="selected"' ?>>
-                      <?php echo htmlentities($room->getName(, ENT_NOQUOTES, 'utf-8'))?>
+                      <?php echo htmlentities($room->getName(), ENT_NOQUOTES, 'utf-8')?>
                   </option>
                 <?php } ?>
               </select>
             </dd>
             <dt><label>Start:</label></dt>
-            <dd><input type="text" id="start<?php echo htmlentities($day->getDayId(, ENT_NOQUOTES, 'utf-8')) ?>" name="start<?php echo htmlentities($day->getDayId(, ENT_NOQUOTES, 'utf-8')) ?>" value="<?php echo htmlentities($day->getStart(, ENT_NOQUOTES, 'utf-8')) ?>" <?php echo ($this->settingsEnabled ? '' : 'disabled="disabled"') ?> /> (hh:mm)</dd>
+            <dd><input type="text" 
+                       id="start<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       name="start<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       value="<?php echo htmlentities($day->getStart(), ENT_NOQUOTES, 'utf-8') ?>" 
+                         <?php echo ($this->settingsEnabled ? '' : 'disabled="disabled"') ?> /> (hh:mm)</dd>
             <dt><label>Einde:</label></dt>
-            <dd><input type="text" id="end<?php echo htmlentities($day->getDayId(, ENT_NOQUOTES, 'utf-8')) ?>" name="end<?php echo htmlentities($day->getDayId(, ENT_NOQUOTES, 'utf-8')) ?>" value="<?php echo htmlentities($day->getEnd(, ENT_NOQUOTES, 'utf-8')) ?>" <?php echo ($this->settingsEnabled ? '' : 'disabled="disabled"') ?> /> (hh:mm)</dd>
+            <dd><input type="text" 
+                       id="end<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       name="end<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       value="<?php echo htmlentities($day->getEnd(), ENT_NOQUOTES, 'utf-8') ?>" 
+                         <?php echo ($this->settingsEnabled ? '' : 'disabled="disabled"') ?> /> (hh:mm)</dd>
             <dd>
-              <input type="hidden" name="days[]" value="<?php echo htmlentities($day->getDayId(, ENT_NOQUOTES, 'utf-8')) ?>" />
-              <input type="submit" class="btn btn-primary" name="btnSave" value="Bewaren" />
-              <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+              <input type="hidden" 
+                     name="days[]" 
+                     value="<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>" />
+              <input type="submit" 
+                     class="btn btn-primary" name="btnSave" value="Bewaren" />
+              <input type="submit" 
+                     class="btn" name="btnCancel" value="Annuleren" />
             </dd>
           </dl>
 
           <?php if ($day->isPresent()) { ?>
             <table class="table table-striped table-condensed">
               <tr class="printOnly">
-                <th colspan="3"><?php echo ucfirst(htmlentities(DateUtilities::weekday(strtotime($day->getDay(, ENT_NOQUOTES, 'utf-8')), false) . ' ' . date('d ', strtotime($day->getDay())) . DateUtilities::month(strtotime($day->getDay()), false))); ?><?php echo ($this->roomName != null ? ': ' . htmlentities($this->roomName, ENT_NOQUOTES, 'utf-8') : '') ?></th>                
+                <th colspan="3">
+                  <?php echo ucfirst(htmlentities(
+                          DateUtilities::weekday(strtotime($day->getDay()), false) .
+                          ' ' . date('d ', strtotime($day->getDay())) . 
+                          DateUtilities::month(strtotime($day->getDay()), false), ENT_NOQUOTES, 'utf-8')); ?>
+                  <?php echo ($this->roomName != null ? ': ' . htmlentities($this->roomName, ENT_NOQUOTES, 'utf-8') : '') ?>
+                </th>                
               </tr>
               <?php $time = strtotime($day->getStart());
-              $pointer = 0;
-              $appointment = $day->getAppointments();
-              while ($time < strtotime($day->getEnd())) {
+                $pointer = 0;
+                $appointment = $day->getAppointments();
+                while ($time < strtotime($day->getEnd())) {
               ?>
                 <tr>
                   <td class="hours"><?php echo Date('H:i', $time) ?></td>
                   <?php if ($pointer >= sizeof($appointment)) { ?>
                     <td class="larger">&nbsp;</td>
                     <td class="icons">
-                      <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'staffId' => $this->staffId)); ?>"><i class="icon-user"><span class="tooltip" data-original-title="Afspraak invoeren"></span></i></a>
-                      <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'staffId' => $this->staffId, 'break' => 'true')); ?>"><i class="icon-time"><span class="tooltip" data-original-title="Pauze invoeren"></span></i></a>
+                      <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'staffId' => $this->staffId)); ?>">
+                        <i class="icon-user"><span class="tooltip" data-original-title="Afspraak invoeren"></span></i>
+                      </a>
+                      <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'staffId' => $this->staffId, 'break' => 'true')); ?>">
+                        <i class="icon-time"><span class="tooltip" data-original-title="Pauze invoeren"></span></i>
+                      </a>
                     </td>
                   <?php }
                   else {
@@ -151,16 +173,28 @@
                         $parent = Application_Model_DbTable_Parents::getParentByParentId($appointment[$pointer]->getParentId());
                         $group = Application_Model_DbTable_Groups::getGroupByGroupId($pupil->getGroupId());
                         $course = ($appointment[$pointer]->getCourseId() != null ? Application_Model_DbTable_Courses::getCourseById($appointment[$pointer]->getCourseId()) : null);?>
-                        <td class="larger"><?php echo $pupil->getFirstname() . ' ' . $pupil->getName() . ' - ' . $parent->getSalutation() . ' (' . $group->getName() . ($course!= null ? ' - ' . $course->getCourse() : '') . ')'; ?></td>
+                        <td class="larger"><?php echo $pupil->getFirstname() . 
+                                ' ' . $pupil->getName() . ' - ' . 
+                                $parent->getSalutation() . ' (' . 
+                                $group->getName() . 
+                                ($course!= null ? ' - ' . $course->getCourse() : '') . ')'; ?>
+                        </td>
                         <td class="icons">
-                          <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-delete', 'appointmentId' => $appointment[$pointer]->getAppointmentId(), 'activeId' => $day->getDayId())); ?>" class="sure"><i class="icon-trash"><span class="tooltip" data-original-title="Afspraak verwijderen"></span></i></a>
+                          <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-delete', 'appointmentId' => $appointment[$pointer]->getAppointmentId(), 'activeId' => $day->getDayId())); ?>" class="sure">
+                            <i class="icon-trash">
+                              <span class="tooltip" 
+                                    data-original-title="Afspraak verwijderen">                                
+                              </span>
+                            </i>
+                          </a>
                         </td>
                         <?php $pointer++;
                       }
                       else { ?>
                         <td class="larger">Pauze</td>
                         <td class="icons">
-                          <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-delete', 'appointmentId' => $appointment[$pointer]->getAppointmentId(), 'activeId' => $day->getDayId())); ?>" class="sure"><i class="icon-trash"><span class="tooltip" data-original-title="Pauze verwijderen"></span></i></a>
+                          <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-delete', 'appointmentId' => $appointment[$pointer]->getAppointmentId(), 'activeId' => $day->getDayId())); ?>" class="sure">
+                            <i class="icon-trash"><span class="tooltip" data-original-title="Pauze verwijderen"></span></i></a>
                         </td>
                         <?php $pointer++;
                       }
@@ -168,8 +202,10 @@
                     else { ?>
                       <td class="larger">&nbsp;</td>
                       <td class="icons">
-                        <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'staffId' => $this->staffId)); ?>"><i class="icon-user"><span class="tooltip" data-original-title="Afspraak invoeren"></span></i></a>
-                        <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'staffId' => $this->staffId, 'break' => 'true')); ?>"><i class="icon-time"><span class="tooltip" data-original-title="Pauze invoeren"></span></i></a>
+                        <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'staffId' => $this->staffId)); ?>">
+                          <i class="icon-user"><span class="tooltip" data-original-title="Afspraak invoeren"></span></i></a>
+                        <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'staffId' => $this->staffId, 'break' => 'true')); ?>">
+                          <i class="icon-time"><span class="tooltip" data-original-title="Pauze invoeren"></span></i></a>
                       </td>
                     <?php }
                   }?>
@@ -182,7 +218,8 @@
           <?php }
           else { ?>
             <div class="alert alert-info">
-              <p><?php echo htmlentities($this->name, ENT_NOQUOTES, 'utf-8') ?> is niet aanwezig vandaag en heeft bijgevolg geen afspraken.</p>
+              <p><?php echo htmlentities($this->name, ENT_NOQUOTES, 'utf-8') ?> 
+                is niet aanwezig vandaag en heeft bijgevolg geen afspraken.</p>
             </div>
           <?php } ?>
         </div>
