@@ -2,9 +2,14 @@
 
 <div class="center">
     <h2>Rechten beheer</h2>
-    <p class="breadcrumb"><a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">Home</a> > Rechten beheer</p>
+    <p class="breadcrumb">
+      <a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">
+        Home
+      </a> &gt; Rechten beheer</p>
     <?php if ($this->accessebilityLevel == 1) { ?>
-        <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'administer'), null, true) ?>" method="post" class="large">
+        <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'administer'), null, true) ?>" 
+              method="post" 
+              class="large">
             <table id="rightsTable" class="table table-striped tablesorter">
                 <thead>
                     <tr>
@@ -15,9 +20,9 @@
                 <tbody>
                     <?php foreach ($this->staffRights as $staffRight) { ?>
                         <tr>
-                            <td><label for="staff<?php echo htmlentities($staffRight->getStaffId()) ?>"><?php echo htmlentities($staffRight->getFirstname() . ' ' . $staffRight->getName()) ?></label></td>
+                            <td><label for="staff<?php echo htmlentities($staffRight->getStaffId(, ENT_NOQUOTES, 'utf-8')) ?>"><?php echo htmlentities($staffRight->getFirstname(, ENT_NOQUOTES, 'utf-8') . ' ' . $staffRight->getName()) ?></label></td>
                             <td>
-                                <select id="staff<?php echo htmlentities($staffRight->getStaffId()) ?>" name="staff<?php echo htmlentities($staffRight->getStaffId()) ?>" class="large">
+                                <select id="staff<?php echo htmlentities($staffRight->getStaffId(, ENT_NOQUOTES, 'utf-8')) ?>" name="staff<?php echo htmlentities($staffRight->getStaffId(, ENT_NOQUOTES, 'utf-8')) ?>" class="large">
                                     <option value="1" <?php echo ($staffRight->getAccessebilityLevel() == 1 ? 'selected="selected"' : '') ?>>Beheerderstoegang hoogste niveau</option>
                                     <option value="2" <?php echo ($staffRight->getAccessebilityLevel() == 2 ? 'selected="selected"' : '') ?>>Beheerderstoegang laagste niveau</option>
                                     <option value="0" <?php echo ($staffRight->getAccessebilityLevel() == 0 ? 'selected="selected"' : '') ?>>Geen beheerderstoegang</option>
