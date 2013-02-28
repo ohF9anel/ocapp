@@ -1,10 +1,28 @@
 <div class="center">
-    <h2>Data update: <?php echo htmlentities($this->updateAction) ?></h2>
-    <p class="breadcrumb"><a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">Home</a> > <?php if ($this->process) { ?><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update'), null, true) ?>"><?php } ?>Data update<?php if ($this->process) { ?></a> > <?php echo htmlentities($this->updateAction); } ?></p>
+    <h2>Data update: <?php echo htmlentities($this->updateAction, ENT_NOQUOTES, 'utf-8') ?></h2>
+    
+    <p class="breadcrumb">
+      <a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">
+        Home
+      </a> 
+      &gt; 
+        <?php if ($this->process) { ?>
+          <a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update'), null, true) ?>">
+        <?php } ?>
+            Data update
+        <?php if ($this->process) { ?>
+          </a> 
+      &gt;
+      <!-- this is not logical TODO -->
+         <?php echo htmlentities($this->updateAction, ENT_NOQUOTES, 'utf-8');?>
+        <?php } ?>
+    </p>
+    
     <?php if(!$this->process) { ?>
         <div class="alert alert-info">
             <a class="close" data-dismiss="alert">&times;</a>
-            <p>Het is aan te raden wanneer u nieuwe data naar de site uploadt dat u de volgorde aanhoudt waarin de items hieronder opgesomd staan.</p>
+            <p>Het is aan te raden wanneer u nieuwe data naar de site uploadt 
+              dat u de volgorde aanhoudt waarin de items hieronder opgesomd staan.</p>
         </div>
     <?php } ?>
     <?php if($this->succes == 'true') { ?>
@@ -16,195 +34,287 @@
     <?php if($this->succes == 'error') { ?>
         <div class="alert alert-error">
             <a class="close" data-dismiss="alert">&times;</a>
-            <p>Er is een fout op getreden waardoor de update van de gegevens niet is geslaagd.</p>
+            <p>Er is een fout op getreden waardoor de update van 
+              de gegevens niet is geslaagd.</p>
         </div>
     <?php } ?>
     <?php if ($this->accessebilityLevel == 1) { 
         switch ($this->update) {
             case 1:     //update staff ?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '1'), null, true) ?>" method="post" enctype="multipart/form-data">
+                <form 
+                  action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '1'), null, true) ?>" 
+                  method="post" 
+                  enctype="multipart/form-data">
                     <dl>
                         <dt><label for="staff">Personeelslijst</label></dt>
                         <dd><input type="file" id="staff" name="staff" /></dd>
-                        <dd>De personeelslijst dient een csv bestand te zijn. De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
+                        <dd>De personeelslijst dient een csv bestand te zijn. 
+                          De velden worden gescheiden doormiddel van een puntkomma 
+                          en dient onderstaande data te bevatten.</dd>
                         <dd>
                             (naam);(voornaam);(Google-account) <br />
                             Jansens;Jan;jansensj@dbz.be<br />
                             Pieters;Piet;pietersp@dbz.be
                         </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Update personeelslijst" />
-                    <input type="submit" class="btn btn-danger" name="btnDel" value="Verwijder personeelslijst" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Update personeelslijst" />
+                    <input type="submit" class="btn btn-danger" name="btnDel" 
+                           value="Verwijder personeelslijst" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
             case 2:     //update pupils ?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '2'), null, true) ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '2'), null, true) ?>" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <dl>
                         <dt><label for="pupils">Leerlingenlijst</label></dt>
                         <dd><input type="file" id="pupils" name="pupils" /></dd>
-                        <dd>De leerlingenlijst dient een csv bestand te zijn. De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
+                        <dd>De leerlingenlijst dient een csv bestand te zijn. 
+                          De velden worden gescheiden doormiddel van een ; 
+                          en dient onderstaande data te bevatten.</dd>
                         <dd>
                             (uuid);(naam);(voornaam);(klas) <br />
                             1234;Jansens;Jan;6ww6<br />
                             1235;Pieters;Piet;6ww8
                         </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Update leerlingenlijst" />
-                    <input type="submit" class="btn btn-danger" name="btnDel" value="Verwijder leerlingenlijst" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Update leerlingenlijst" />
+                    <input type="submit" class="btn btn-danger" name="btnDel" 
+                           value="Verwijder leerlingenlijst" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
             case 3:     //update parents ?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '3'), null, true) ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '3'), null, true) ?>" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <dl>
                         <dt><label for="parents">Ouderlijst</label></dt>
                         <dd><input type="file" id="parents" name="parents" /></dd>
-                        <dd>De ouderlijst dient een csv bestand te zijn. De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
+                        <dd>De ouderlijst dient een csv bestand te zijn. 
+                          De velden worden gescheiden doormiddel van een ; 
+                          en dient onderstaande data te bevatten.</dd>
                         <dd>
                             (aanspreking);(login);(wachtwoord);(opmerking, optioneel)<br />
                             Jan en Maria Jansens;jm;Azerty123;Interimaris voor Gert Mulders<br />
                             Piet en Frieda Pieters;pf;Azerty123
                         </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Update ouderlijst" />
-                    <input type="submit" class="btn btn-danger" name="btnDel" value="Verwijder ouderlijst" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Update ouderlijst" />
+                    <input type="submit" class="btn btn-danger" name="btnDel" 
+                           value="Verwijder ouderlijst" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
             case 4:     //update groups ?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '4'), null, true) ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '4'), null, true) ?>" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <dl>
                         <dt><label for="groups">Groepenlijst</label></dt>
                         <dd><input type="file" id="rooms" name="groups" /></dd>
-                        <dd>De klassenlijst dient een csv bestand te zijn. De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
+                        <dd>De klassenlijst dient een csv bestand te zijn. 
+                          De velden worden gescheiden doormiddel van een ; 
+                          en dient onderstaande data te bevatten.</dd>
                         <dd>
                             (jaar);(groepnaam);(Google-account klassenleraar);(opmerking, optioneel)<br />
                             6;6ww8;jansensj@dbz.be;Interimaris voor Gert Mulders<br />
                             6;6ww6;pietersp@dbz.be
                         </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Update klassenlijst" />
-                    <input type="submit" class="btn btn-danger" name="btnDel" value="Verwijder klassenlijst" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Update klassenlijst" />
+                    <input type="submit" class="btn btn-danger" name="btnDel" 
+                           value="Verwijder klassenlijst" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
             case 5:     //update courses ?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '5'), null, true) ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '5'), null, true) ?>" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <dl>
                         <dt><label for="courses">Vakkenlijst</label></dt>
                         <dd><input type="file" id="rooms" name="courses" /></dd>
-                        <dd>De vakkenlijst dient een csv bestand te zijn. De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
+                        <dd>De vakkenlijst dient een csv bestand te zijn. 
+                          De velden worden gescheiden doormiddel van een ; 
+                          en dient onderstaande data te bevatten.</dd>
                         <dd>
                             (Google-account leerkracht);(vaknaam);(uniek vaknummer)<br />
                             jansensj@dbz.be;Wiskunde;123<br />
                             pietersp@dbz.be;Frans;124
                         </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Update vakkenlijst" />
-                    <input type="submit" class="btn btn-danger" name="btnDel" value="Verwijder vakkenlijst" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Update vakkenlijst" />
+                    <input type="submit" class="btn btn-danger" name="btnDel" 
+                           value="Verwijder vakkenlijst" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
             case 6:     //update rooms ?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '6'), null, true) ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '6'), null, true) ?>" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <dl>
                         <dt><label for="rooms">Lokalenlijst</label></dt>
                         <dd><input type="file" id="rooms" name="rooms" /></dd>
-                        <dd>De lokalenlijst dient een csv bestand te zijn. De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
+                        <dd>De lokalenlijst dient een csv bestand te zijn. 
+                          De velden worden gescheiden doormiddel van een ; 
+                          en dient onderstaande data te bevatten.</dd>
                         <dd>(naam) <br />
                             A104<br />
                             A105
                         </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Update lokalenlijst" />
-                    <input type="submit" class="btn btn-danger" name="btnDel" value="Verwijder lokalenlijst" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Update lokalenlijst" />
+                    <input type="submit" class="btn btn-danger" name="btnDel" 
+                           value="Verwijder lokalenlijst" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
-            case 7:     //update childrelations?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '7'), null, true) ?>" method="post" enctype="multipart/form-data">
+            case 7:     //update childrelations ?>
+                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '7'), null, true) ?>" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <dl>
                         <dt><label for="relations">Ouder-kindrelaties</label></dt>
                         <dd><input type="file" id="relations" name="relations" /></dd>
-                        <dd>De ouderkindrelatielijst dient een csv bestand te zijn. De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
+                        <dd>De ouderkindrelatielijst dient een csv bestand te zijn. 
+                          De velden worden gescheiden doormiddel van een ; 
+                          en dient onderstaande data te bevatten.</dd>
                         <dd>(login);(uuid) <br />
                             jm;1234<br />
                             pf;1235
                         </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Update ouder-kindrelaties" />
-                    <input type="submit" class="btn btn-danger" name="btnDel" value="Verwijder ouder-kindrelaties" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Update ouder-kindrelaties" />
+                    <input type="submit" class="btn btn-danger" name="btnDel" 
+                           value="Verwijder ouder-kindrelaties" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
-            case 8:     //update groups_have_courses?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '8'), null, true) ?>" method="post" enctype="multipart/form-data">
+            case 8:     //update groups_have_courses ?>
+                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '8'), null, true) ?>" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <dl>
                         <dt><label for="allocations">Lestoewijzingen</label></dt>
                         <dd><input type="file" id="allocations" name="allocations" /></dd>
-                        <dd>De lestoewijzingslijst dient een csv bestand te zijn. De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
+                        <dd>De lestoewijzingslijst dient een csv bestand te zijn. 
+                          De velden worden gescheiden doormiddel van een ; 
+                          en dient onderstaande data te bevatten.</dd>
                         <dd>(klas);(uuid)<br />
                             6ww6;123<br />
                             6ww8;124
                         </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Update lestoewijzingen" />
-                    <input type="submit" class="btn btn-danger" name="btnDel" value="Verwijder lestoewijzingen" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Update lestoewijzingen" />
+                    <input type="submit" class="btn btn-danger" name="btnDel" 
+                           value="Verwijder lestoewijzingen" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
-            case 9:     //update responsibles?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '9'), null, true) ?>" method="post" enctype="multipart/form-data">
+            case 9:     //update responsibles ?>
+                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '9'), null, true) ?>" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <dl>
                         <dt><label for="responsibles">Begeleiderslijst</label></dt>
                         <dd><input type="file" id="responsibles" name="responsibles" /></dd>
-                        <dd>De begeleiderslijst dient een csv bestand te zijn. De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
+                        <dd>De begeleiderslijst dient een csv bestand te zijn. 
+                          De velden worden gescheiden doormiddel van een ; en dient onderstaande data te bevatten.</dd>
                         <dd>(Google-account begeleider);(jaar);(functie);(opmerking, optioneel)<br />
                             jansensj@dbz.be;6;CLB-medewerker; Ter vervanging van Gert Mulders<br />
                             pietersp@dbz.be;6;Graadco&ouml;rdinator
                         </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Update begeleiderslijst" />
-                    <input type="submit" class="btn btn-danger" name="btnDel" value="Verwijder begeleiderslijst" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Update begeleiderslijst" />
+                    <input type="submit" class="btn btn-danger" name="btnDel" 
+                           value="Verwijder begeleiderslijst" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
             case 10:    //delete all data ?>
-                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '10'), null, true) ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'data-update', 'update' => '10'), null, true) ?>" 
+                      method="post" 
+                      enctype="multipart/form-data">
                     <dl>
                         <dt><label for="allocations">Verdwijderen</label></dt>
-                        <dd>Wanneer u verder gaat zal alle data verwijderd zijn uit de database, deze actie kunt u later niet meer ongedaan maken.</dd>
+                        <dd>Wanneer u verder gaat zal alle data verwijderd zijn 
+                          uit de database, 
+                          deze actie kunt u later niet meer ongedaan maken.
+                          Maak eerst een backup.
+                        </dd>
                     </dl>
-                    <input type="submit" class="btn btn-primary" name="btnSave" value="Verwijder alle data" />
-                    <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" class="btn btn-primary" name="btnSave" 
+                           value="Verwijder alle data" />
+                    <input type="submit" class="btn" name="btnCancel" 
+                           value="Annuleren" />
                 </form>
                 <?php break;
             default:    //show possibilities ?>
                 <h3>Schoolgegevens</h3>
                 <ul>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '1'), null, true) ?>" ><span class="label label-<?php echo ($this->amount1 == 0 ? 'important' : 'success') ?>"> <?php echo htmlentities($this->amount1) ?></span> Update personeelslijst</a></li>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '4'), null, true) ?>" ><span class="label label-<?php echo ($this->amount4 == 0 ? 'important' : 'success') ?>"><?php echo htmlentities($this->amount4) ?></span> Update klassenlijst</a></li>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '5'), null, true) ?>" ><span class="label label-<?php echo ($this->amount5 == 0 ? 'important' : 'success') ?>"><?php echo htmlentities($this->amount5) ?></span> Update vakkenlijst</a></li>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '9'), null, true) ?>" ><span class="label label-<?php echo ($this->amount9 == 0 ? 'important' : 'success') ?>"><?php echo htmlentities($this->amount9) ?></span> Update begeleiderslijst</a></li>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '6'), null, true) ?>" ><span class="label label-<?php echo ($this->amount6 == 0 ? 'important' : 'success') ?>"><?php echo htmlentities($this->amount6) ?></span> Update lokalenlijst</a></li>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '8'), null, true) ?>" ><span class="label label-<?php echo ($this->amount8 == 0 ? 'important' : 'success') ?>"><?php echo htmlentities($this->amount8) ?></span> Update lestoewijzingen</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '1'), null, true) ?>" >
+                        <span class="label label-<?php echo ($this->amount1 == 0 ? 'important' : 'success') ?>">
+                          <?php echo htmlentities($this->amount1, ENT_NOQUOTES, 'utf-8') ?></span> Update personeelslijst</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '4'), null, true) ?>" >
+                        <span class="label label-<?php echo ($this->amount4 == 0 ? 'important' : 'success') ?>">
+                          <?php echo htmlentities($this->amount4, ENT_NOQUOTES, 'utf-8') ?></span> Update klassenlijst</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '5'), null, true) ?>" >
+                        <span class="label label-<?php echo ($this->amount5 == 0 ? 'important' : 'success') ?>">
+                          <?php echo htmlentities($this->amount5, ENT_NOQUOTES, 'utf-8') ?></span> Update vakkenlijst</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '9'), null, true) ?>" >
+                        <span class="label label-<?php echo ($this->amount9 == 0 ? 'important' : 'success') ?>">
+                          <?php echo htmlentities($this->amount9, ENT_NOQUOTES, 'utf-8') ?></span> Update begeleiderslijst</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '6'), null, true) ?>" >
+                        <span class="label label-<?php echo ($this->amount6 == 0 ? 'important' : 'success') ?>">
+                          <?php echo htmlentities($this->amount6, ENT_NOQUOTES, 'utf-8') ?></span> Update lokalenlijst</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '8'), null, true) ?>" >
+                        <span class="label label-<?php echo ($this->amount8 == 0 ? 'important' : 'success') ?>">
+                          <?php echo htmlentities($this->amount8, ENT_NOQUOTES, 'utf-8') ?></span> Update lestoewijzingen</a></li>
                 </ul>
                 <h3>Leerlingengegevens</h3>
                 <ul>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '3'), null, true) ?>" ><span class="label label-<?php echo ($this->amount3 == 0 ? 'important' : 'success') ?>"><?php echo htmlentities($this->amount3) ?></span> Update ouderlijst</a></li>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '2'), null, true) ?>" ><span class="label label-<?php echo ($this->amount2 == 0 ? 'important' : 'success') ?>"><?php echo htmlentities($this->amount2) ?></span> Update leerlingenlijst</a></li>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '7'), null, true) ?>" ><span class="label label-<?php echo ($this->amount7 == 0 ? 'important' : 'success') ?>"><?php echo htmlentities($this->amount7) ?></span> Update ouder-kindrelaties</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '3'), null, true) ?>" >
+                        <span class="label label-<?php echo ($this->amount3 == 0 ? 'important' : 'success') ?>">
+                          <?php echo htmlentities($this->amount3, ENT_NOQUOTES, 'utf-8') ?></span> Update ouderlijst</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '2'), null, true) ?>" >
+                        <span class="label label-<?php echo ($this->amount2 == 0 ? 'important' : 'success') ?>">
+                          <?php echo htmlentities($this->amount2, ENT_NOQUOTES, 'utf-8') ?></span> Update leerlingenlijst</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '7'), null, true) ?>" >
+                        <span class="label label-<?php echo ($this->amount7 == 0 ? 'important' : 'success') ?>">
+                          <?php echo htmlentities($this->amount7, ENT_NOQUOTES, 'utf-8') ?></span> Update ouder-kindrelaties</a></li>
                 </ul>
                 <h3>Verwijder data</h3>
                 <ul>
-                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '10'), null, true) ?>" >Verwijder alle data uit de applicatie</a></li>
+                    <li><a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'data-update', 'update' => '10'), null, true) ?>" >
+                        Verwijder alle data uit de applicatie</a></li>
                 </ul>
                 <?php break;
         } 
     } else { ?>
         <div class="alert alert-info">
-            <p>U heeft onvoldoende rechten om de gegevens te updaten, richt u hiertoe tot de administrator.</p>
+            <p>U heeft onvoldoende rechten om de gegevens te updaten, 
+              richt u hiertoe tot de administrator.</p>
         </div>
     <?php } ?>
 </div>
