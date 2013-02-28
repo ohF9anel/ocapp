@@ -73,15 +73,17 @@
                                   <?php echo ($teacher[2] ? '<i class="icon-exclamation-sign"></i>' : $teacher[2] ) ?></td>
                                 <td>
                                   <?php echo htmlentities($teacher[1], ENT_NOQUOTES, 'utf-8'); ?></td>
-                                <td class="iconsSmall">
+                                <td class="iconsSmall"><-!! todo broken a -->
                                   <a href="<?php echo $this->url(array('controller' => 'Admin', 'action' => 'appointment-edit', 'teid' => $teacher[0]), null, true); ?>"
                                      <i class="icon-edit"><span class="tooltip" data-original-title="Agenda beheren"></span></i></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
                 </table>
+              
                 <div id="pagerteacher" class="pager">
-                    <form action="<?php $this->url(array('controller' => 'Admin', 'action' => 'appointment')) ?>" method="post">
+                    <form action="<?php $this->url(array('controller' => 'Admin', 'action' => 'appointment')) ?>" 
+                          method="post">
                         <p>
                             <a class="prev btn">Vorige</a>
                             <input class="pagedisplay" type="text" disabled="disabled">
