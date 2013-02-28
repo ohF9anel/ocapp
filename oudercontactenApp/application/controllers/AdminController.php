@@ -10,7 +10,8 @@ class AdminController extends Zend_Controller_Action
     protected $conferenceAvailable = false;
 
     /**
-     * This function is executed each time an AdminController action is processed, but the result of execution may deviate by visiting other actions.
+     * This function is executed each time an AdminController action is processed, 
+     * but the result of execution may deviate by visiting other actions.
      */
     public function init()
     {
@@ -23,7 +24,8 @@ class AdminController extends Zend_Controller_Action
         }
 
         //check if user is authenticated and authenticate if necessary
-        if ($this->getRequest()->getActionName() != 'authenticate' && $this->session->authAs != 'Admin') {
+        if ($this->getRequest()->getActionName() != 'authenticate' && 
+                $this->session->authAs != 'Admin') {
             $this->_helper->_redirector('authenticate', 'Admin');
         }
         
@@ -87,7 +89,8 @@ class AdminController extends Zend_Controller_Action
     
     /**
      * Administer action
-     * Provides functionality to allow an administrator to assign administration rights to other staff members
+     * Provides functionality to allow an administrator to assign 
+     * administration rights to other staff members
      */
     public function administerAction()
     {
@@ -105,7 +108,14 @@ class AdminController extends Zend_Controller_Action
                         $staffRight->setAccessebilityLevel($accessebilityLevel);
                         $staffRight->save();
                         //log
-                        $logMessage = '[' . date('D M d H:i:s Y') . '] [' . $this->staff->getFirstname() . ' ' . $this->staff->getName() . '@' . $_SERVER['REMOTE_ADDR'] . '] Changed accessebility level of : ' . $staffRight->getFirstname() . ' ' . $staffRight->getName() . '->' . $staffRight->getAccessebilityLevel();
+                        $logMessage = '[' . date('D M d H:i:s Y') . '] [' 
+                                . $this->staff->getFirstname() . ' ' 
+                                . $this->staff->getName() . '@' 
+                                . $_SERVER['REMOTE_ADDR'] 
+                                . '] Changed accessebility level of : ' 
+                                . $staffRight->getFirstname() . ' ' 
+                                . $staffRight->getName() . '->' 
+                                . $staffRight->getAccessebilityLevel();
                         $file = dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../log/dataupdate.log';
                         $fileHandle = fopen($file, 'a');
                         fwrite($fileHandle, $logMessage . "\r\n");
