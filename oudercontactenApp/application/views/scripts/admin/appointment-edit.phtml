@@ -9,7 +9,10 @@
     <a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">
       Home
     </a> 
-    &gt; <a href="<?php echo $this->url(array('controller' => $this->controller, 'action' => 'appointment'), null, true) ?>">
+    &gt; <a href="<?php echo $this->url(
+            array('controller' => $this->controller, 
+                  'action' => 'appointment'), 
+            null, true) ?>">
       Planning
     </a> 
     &gt; <?php echo ($this->titular ? 'Klassenleraren' : 'Vakleerkrachten'); ?>
