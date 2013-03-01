@@ -74,6 +74,7 @@ class Zend_Loader_Autoloader
 
     /**
      * @var bool Whether or not to suppress file not found warnings
+     * default false, for error logging switch to true
      */
     protected $_suppressNotFoundWarnings = false;
 
