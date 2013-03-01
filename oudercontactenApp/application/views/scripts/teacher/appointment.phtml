@@ -1,96 +1,170 @@
 <div class="center">
-    <h2><?php echo ($this->titular ? 'Klassenleraar ' : 'Vakleerkracht ') . htmlentities($this->name); ?></h2>
-    <p class="breadcrumb"><a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">Home</a> > <?php echo ($this->titular ? 'Klassenleraar' : 'Vakleerkracht'); ?></p>
-    <div class="printOnly">
-        <h2>Agenda <?php echo ($this->titular ? 'klassenleraar' : 'vakleerkracht') . ': ' . htmlentities($this->name); ?></h2>
-    </div>
-    
-    <div class="tabbable">
-        <ul class="nav nav-tabs">
-            <?php foreach ($this->days as $day) { ?>
-                <li <?php if ($this->activeId == $day->getDayId()) echo'class="active"'; ?>><a href="#d<?php echo htmlentities($day->getDayId()) ?>" data-toggle="tab"><?php echo htmlentities(DateUtilities::weekday(strtotime($day->getDay()), true) . ' ' . date('d ', strtotime($day->getDay())) . DateUtilities::month(strtotime($day->getDay()), true));; ?></a></li>
-            <?php } ?>
-        </ul>
-        <form action="<?php echo $this->url(array('controller' => 'Teacher', 'action' => 'appointment')) ?>" method="post">
-        <div class="tab-content">                
-            <?php foreach ($this->days as $day) { ?>
-                <div class="tab-pane <?php if ($this->activeId == $day->getDayId()) echo'active'; ?>" id="d<?php echo htmlentities($day->getDayId()) ?>">
-                    <dl class="settings">
-                        <dt><label>Aanwezig: </label></dt>
-                        <dd><input type="checkbox" name="present<?php echo htmlentities($day->getDayId()) ?>" value="true" <?php echo ($day->isPresent() ? 'checked="checked"' : '') . ($day->isObligated() || !$this->settingsEnabled ? ' disabled="disabled"' : ''); ?>/></dd>
-                        <dt><label>Lokaal:</label></dt>
-                        <dd>
-                            <?php echo htmlentities(Application_Model_DbTable_Rooms::getNameByRoomId($day->getRoomId())) ?>&nbsp;
-                        </dd>
-                        <dd>
-                            <input type="hidden" name="days[]" value="<?php echo htmlentities($day->getDayId()) ?>" />
-                            <?php if($this->settingsEnabled) { ?>
-                                <input type="submit" class="btn btn-primary" name="btnSave" value="Bewaren" />
-                                <input type="submit" class="btn" name="btnCancel" value="Annuleren" />
-                            <?php } ?>
-                        </dd>
-                    </dl>
+  <h2>
+    <?php echo ($this->titular ? 'Klassenleraar ' : 'Vakleerkracht ') . 
+      htmlentities($this->name, ENT_NOQUOTES, 'utf-8'); ?>
+  </h2>
+  <p class="breadcrumb">
+    <a href="<?php echo $this->url(array('controller' => $this->controller), null, true) ?>">
+    Home
+    </a> 
+    &gt; <?php echo ($this->titular ? 'Klassenleraar' : 'Vakleerkracht'); ?></p>
+  
+  <div class="printOnly">
+    <h2>Agenda <?php echo ($this->titular ? 'klassenleraar' : 'vakleerkracht') . ': ' . 
+        htmlentities($this->name, ENT_NOQUOTES, 'utf-8'); ?>
+    </h2>
+  </div>
+  
+  <div class="tabbable">
+    <ul class="nav nav-tabs">
+      <?php foreach ($this->days as $day) { ?>
+        <li <?php if ($this->activeId == $day->getDayId()) echo'class="active"'; ?>>
+          <a href="#d<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+           data-toggle="tab">
+          <?php echo htmlentities(
+                  DateUtilities::weekday(strtotime($day->getDay(), true)) . ' ' . 
+                  date('d ', strtotime($day->getDay())) . 
+                  DateUtilities::month(strtotime($day->getDay()), true)
+                  , ENT_NOQUOTES, 'utf-8'); ?>
+          </a>
+        </li>
+      <?php } ?>
+    </ul>
+    <form action="<?php echo $this->url(array('controller' => 'Teacher', 'action' => 'appointment')) ?>" 
+          method="post">
+    <div class="tab-content">        
+      <?php foreach ($this->days as $day) { ?>
+        <div class="tab-pane <?php if ($this->activeId == $day->getDayId()) echo'active'; ?>" 
+             id="d<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>">
+          <dl class="settings">
+            <dt><label>Aanwezig: </label></dt>
+            <dd><input type="checkbox" 
+                       name="present<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>" 
+                       value="true" 
+                       <?php echo ($day->isPresent() ? 'checked="checked"' : '') . 
+                               ($day->isObligated() || !$this->settingsEnabled ? ' disabled="disabled"' : ''); ?>/>
+            </dd>
+            
+            <dt><label>Lokaal:</label></dt>
+            <dd>
+              <?php echo htmlentities(Application_Model_DbTable_Rooms::getNameByRoomId($day->getRoomId()), ENT_NOQUOTES, 'utf-8') ?>&nbsp;
+            </dd>
+            <dd>
+              <input type="hidden" 
+                     name="days[]" 
+                     value="<?php echo htmlentities($day->getDayId(), ENT_NOQUOTES, 'utf-8') ?>" />
+              <?php if($this->settingsEnabled) { ?>
+                <input type="submit" 
+                       class="btn btn-primary" 
+                       name="btnSave" 
+                       value="Bewaren" />
+                <input type="submit" 
+                       class="btn" 
+                       name="btnCancel" 
+                       value="Annuleren" />
+              <?php } ?>
+            </dd>
+          </dl>
 
-                    <?php if ($day->isPresent()) { ?>
-                        <table class="table table-striped table-condensed">
-                            <tr class="printOnly">
-                                <th colspan="3"><?php echo ucfirst(htmlentities(DateUtilities::weekday(strtotime($day->getDay()), false) . ' ' . date('d ', strtotime($day->getDay())) . DateUtilities::month(strtotime($day->getDay()), false))); ?><?php echo ($this->roomName != null ? ': ' . htmlentities($this->roomName) : '') ?></th>                                
-                            </tr>
-                            <?php $time = strtotime($day->getStart());
-                            $pointer = 0;
-                            $appointment = $day->getAppointments();
-                            while ($time < strtotime($day->getEnd())) {
-                            ?>
-                                <tr>
-                                    <td class="hours"><?php echo Date('H:i', $time) ?></td>
-                                    <?php if ($pointer >= sizeof($appointment)) { ?>
-                                        <td>&nbsp;</td>
-                                        <td class="icons">
-                                            <a href="<?php echo $this->url(array('controller' => 'Teacher', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'break' => 'true')); ?>"><i class="icon-time"></i></a>
-                                        </td>
-                                    <?php }
-                                    else {
-                                        $slot = $appointment[$pointer]->getAppointment();
-                                        if (strtotime($slot) == $time) {
-                                            if ($appointment[$pointer]->getPupilId() != null && $appointment[$pointer]->getParentId() != null) {
-                                                $pupil = Application_Model_DbTable_Pupils::getPupilById($appointment[$pointer]->getPupilId());
-                                                $group = Application_Model_DbTable_Groups::getGroupByGroupId($pupil->getGroupId());?>
-                                                <td><?php echo $pupil->getFirstname() . ' ' . $pupil->getName() . ' - ' . $group->getName();?></td>
-                                                <td class="icons">
-                                                    &nbsp;
-                                                </td>
-                                                <?php $pointer++;
-                                            }
-                                            else { ?>
-                                                <td>Pauze</td>
-                                                <td class="icons">
-                                                    <a href="<?php echo $this->url(array('controller' => 'Teacher', 'action' => 'appointment-delete', 'appointmentId' => $appointment[$pointer]->getAppointmentId(), 'activeId' => $day->getDayId())); ?>"><i class="icon-trash"><span class="tooltip" data-original-title="Pauze verwijderen"></span></i></a>
-                                                </td>
-                                                <?php $pointer++;
-                                            }
-                                        }
-                                        else { ?>
-                                            <td>&nbsp;</td>
-                                            <td class="icons">
-                                                <a href="<?php echo $this->url(array('controller' => 'Teacher', 'action' => 'appointment-new', 'time' => Date('H:i', $time), 'dayId' => $day->getDayId(), 'break' => 'true')); ?>"><i class="icon-time"><span class="tooltip" data-original-title="Pauze invoeren"></span></i></a>
-                                            </td>
-                                        <?php }
-                                    }?>
-                                </tr>
-                                <?php
-                                $time += $this->timeslotLength;
-                            } ?>
-                        </table>
-                        <a href="#" class="btn btnPrint"><i class="icon-print"></i> Print agenda</a>
-                    <?php }
+          <?php if ($day->isPresent()) { ?>
+            <table class="table table-striped table-condensed">
+              <tr class="printOnly">
+                <th colspan="3">
+                  <?php echo ucfirst(htmlentities(
+                          DateUtilities::weekday(strtotime($day->getDay()), false) . ' ' . 
+                          date('d ', strtotime($day->getDay())) . 
+                          DateUtilities::month(strtotime($day->getDay()), false))
+                          , ENT_NOQUOTES, 'utf-8'); ?>
+                  <?php echo ($this->roomName != null 
+                          ? ': ' . htmlentities($this->roomName, ENT_NOQUOTES, 'utf-8') 
+                          : ''
+                    ) ?>
+                </th>                
+              </tr>
+              <?php 
+              $time = strtotime($day->getStart());
+              $pointer = 0;
+              $appointment = $day->getAppointments();
+              
+              while ($time < strtotime($day->getEnd())) {
+              ?>
+                <tr>
+                  <td class="hours"><?php echo Date('H:i', $time) ?></td>
+                  <?php if ($pointer >= sizeof($appointment)) { ?>
+                    <td>&nbsp;</td>
+                    <td class="icons">
+                      <a href="<?php echo $this->url(
+                              array('controller' => 'Teacher', 
+                                    'action' => 'appointment-new', 
+                                    'time' => Date('H:i', $time), 
+                                    'dayId' => $day->getDayId(), 
+                                    'break' => 'true')); ?>"
+                      >
+                        <i class="icon-time"></i>
+                      </a>
+                    </td>
+                  <?php }
+                  else {
+                    $slot = $appointment[$pointer]->getAppointment();
+                    if (strtotime($slot) == $time) {
+                      if ($appointment[$pointer]->getPupilId() != null && $appointment[$pointer]->getParentId() != null) {
+                        $pupil = Application_Model_DbTable_Pupils::getPupilById($appointment[$pointer]->getPupilId());
+                        $group = Application_Model_DbTable_Groups::getGroupByGroupId($pupil->getGroupId());?>
+                        <td><?php echo $pupil->getFirstname() . ' ' . $pupil->getName() . ' - ' . $group->getName();?></td>
+                        <td class="icons">
+                          &nbsp;
+                        </td>
+                        <?php $pointer++;
+                      }
+                      else { ?>
+                        <td>Pauze</td>
+                        <td class="icons">
+                          <a href="<?php echo $this->url(
+                                  array('controller' => 'Teacher', 
+                                      'action' => 'appointment-delete', 
+                                      'appointmentId' => $appointment[$pointer]->getAppointmentId(), 
+                                      'activeId' => $day->getDayId())); ?>">
+                            <i class="icon-trash">
+                              <span class="tooltip" data-original-title="Pauze verwijderen"></span>
+                            </i>
+                          </a>
+                        </td>
+                        <?php $pointer++;
+                      }
+                    }
                     else { ?>
-                        <div class="alert alert-info">
-                            <p>U bent vandaag niet aanwezig en hebt bijgevolg geen afspraken.</p>
-                        </div>
-                    <?php } ?>
-                </div>
-            <?php } ?>
+                      <td>&nbsp;</td>
+                      <td class="icons">
+                        <a href="<?php echo $this->url(
+                                array('controller' => 'Teacher', 
+                                      'action' => 'appointment-new', 
+                                      'time' => Date('H:i', $time), 
+                                      'dayId' => $day->getDayId(), 
+                                      'break' => 'true')); ?>">
+                          <i class="icon-time">
+                            <span class="tooltip" data-original-title="Pauze invoeren"></span>
+                          </i></a>
+                      </td>
+                    <?php }
+                  }?>
+                </tr>
+                <?php
+                $time += $this->timeslotLength;
+              } ?>
+            </table>
+            <a href="#" class="btn btnPrint">
+              <i class="icon-print"></i> 
+              Print agenda
+            </a>
+          <?php }
+          else { ?>
+            <div class="alert alert-info">
+              <p>U bent vandaag niet aanwezig en hebt bijgevolg geen afspraken.</p>
+            </div>
+          <?php } ?>
         </div>
-        </form>
+      <?php } ?>
     </div>
+    </form>
+  </div>
 </div>
