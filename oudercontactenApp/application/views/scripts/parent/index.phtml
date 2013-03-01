@@ -2,7 +2,7 @@
 
 <div class="center">
     <?php if ($this->conferencesAvailable) { ?>
-        <h2><?php echo htmlentities($this->conferenceName) ?></h2>
+        <h2><?php echo htmlentities($this->conferenceName, ENT_NOQUOTES, 'utf-8') ?></h2>
         <p class="breadcrumb">Home</p>
         <p class="justify">Het Don Boscocollege Zwijnaarde nodigt u van harte uit op het oudercontact.</p>
         <?php if ($this->confirm) { ?>
@@ -21,12 +21,16 @@
             </tr>
             <tr>
                 <td>Klassenleraren</td>
-                <td><?php echo htmlentities($this->days1) ?></td>
-                <td><?php echo htmlentities($this->start1) ?></td>
-                <td><?php echo htmlentities($this->end1) ?></td>
+                <td><?php echo htmlentities($this->days1, ENT_NOQUOTES, 'utf-8') ?></td>
+                <td><?php echo htmlentities($this->start1, ENT_NOQUOTES, 'utf-8') ?></td>
+                <td><?php echo htmlentities($this->end1, ENT_NOQUOTES, 'utf-8') ?></td>
                 <td>
                     <?php if ($this->bookTitular) { ?>
-                        <a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'book', 'book' => 'type1'), null, true) ?>" class="btn btn-info"><i class="icon-edit icon-white"></i> <?php echo ($this->titularMake ? 'Maak reservatie' : 'Wijzig reservatie') ?></a>
+                        <a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'book', 'book' => 'type1'), null, true) ?>" 
+                           class="btn btn-info">
+                          <i class="icon-edit icon-white"></i> 
+                          <?php echo ($this->titularMake ? 'Maak reservatie' : 'Wijzig reservatie') ?>
+                        </a>
                     <?php }
                     else { ?>
                         &nbsp;
@@ -35,12 +39,16 @@
             </tr>
             <tr>
                 <td>Vakleerkrachten</td>
-                <td><?php echo htmlentities($this->days2) ?></td>
-                <td><?php echo htmlentities($this->start2) ?></td>
-                <td><?php echo htmlentities($this->end2) ?></td>
+                <td><?php echo htmlentities($this->days2, ENT_NOQUOTES, 'utf-8') ?></td>
+                <td><?php echo htmlentities($this->start2, ENT_NOQUOTES, 'utf-8') ?></td>
+                <td><?php echo htmlentities($this->end2, ENT_NOQUOTES, 'utf-8') ?></td>
                 <td>
                     <?php if ($this->bookTeacher) { ?>
-                        <a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'book', 'book' => 'type2'), null, true) ?>" class="btn btn-info"><i class="icon-edit icon-white"></i> <?php echo ($this->teacherMake ? 'Maak reservatie' : 'Wijzig reservatie') ?></a>
+                        <a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'book', 'book' => 'type2'), null, true) ?>" 
+                           class="btn btn-info">
+                          <i class="icon-edit icon-white"></i> 
+                          <?php echo ($this->teacherMake ? 'Maak reservatie' : 'Wijzig reservatie') ?>
+                        </a>
                     <?php } 
                     else { ?>
                         &nbsp;
@@ -52,39 +60,83 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td><a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'appointment'), null, true); ?>" class="btn btn-info"><i class="icon-calendar icon-white"></i> Afspraken</a></td>
+                <td><a href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'appointment'), null, true); ?>" 
+                       class="btn btn-info">
+                    <i class="icon-calendar icon-white"></i> 
+                    Afspraken
+                  </a>
+                </td>
             </tr>
         </table>
         <div id="alertMore" class="alert alert-info">
             <a id="lnkClose"class="close">&times;</a>
-            <p class="justify">Het oudercontact verloopt in 2 delen. Tijdens het eerste gedeelte <strong>(<?php echo htmlentities($this->days1) ?>)</strong> krijgt u de gelegenheid de klassenleraar van uw kind/kinderen te ontmoeten om zodoende een algemeen beeld over hun prestaties te verkrijgen. Tijdens het tweede gedeelte <strong>(<?php echo htmlentities($this->days2) ?>)</strong> krijgt u de mogelijkheid om een of meerdere vakleerkrachten te ontmoeten.</p>
-            <p class="justify">Inschrijvingen voor beide oudercontacten verlopen via deze applicatie. Bovenstaand vindt u de start- en einddatum voor deze inschrijvingen. Tijdens deze periode zal op deze pagina een knop beschikbaar zijn via dewelke u zich kunt inschrijven. Via afspraken hebt u ten allen tijde een overzicht van de afspraken die u maakte voor dit oudercontact.</p>
+            <p class="justify">
+              Het oudercontact verloopt in 2 delen. 
+              Tijdens het eerste gedeelte 
+              <strong>
+                (<?php echo htmlentities($this->days1, ENT_NOQUOTES, 'utf-8') ?>)
+              </strong> 
+              krijgt u de gelegenheid de klassenleraar van uw kind/kinderen te 
+              ontmoeten om zodoende een algemeen beeld over hun prestaties te 
+              verkrijgen. Tijdens het tweede gedeelte 
+              <strong>
+                (<?php echo htmlentities($this->days2, ENT_NOQUOTES, 'utf-8') ?>)
+              </strong> krijgt u de mogelijkheid om een of meerdere 
+              vakleerkrachten te ontmoeten.</p>
+            <p class="justify">
+              Inschrijvingen voor beide oudercontacten verlopen via deze applicatie. 
+              Bovenstaand vindt u de start- en einddatum voor deze inschrijvingen. 
+              Tijdens deze periode zal op deze pagina een knop beschikbaar zijn 
+              via dewelke u zich kunt inschrijven. Via afspraken hebt u ten allen 
+              tijde een overzicht van de afspraken die u maakte voor dit oudercontact.</p>
         </div>
-        <p><a id="lnkMore" href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'index', 'info' => 'more'), null, true) ?>">Meer info</a></p>
+        <p><a id="lnkMore" 
+              href="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'index', 'info' => 'more'), null, true) ?>">
+            Meer info
+          </a>
+        </p>
     <?php } 
     else { ?>
         <h2>Oudercontacten</h2>
         <div class="alert alert-info">
-            <p>Er zijn momenteel geen oudercontacten waarop u uitgenodigd bent. U krijgt tijdig een uitnodiging wanneer een volgend oudercontact zal plaatsvinden.</p>
+            <p>
+              Er zijn momenteel geen oudercontacten waarop u uitgenodigd bent. 
+              U krijgt tijdig een uitnodiging wanneer een volgend oudercontact 
+              zal plaatsvinden.</p>
         </div>
     <?php } ?>
     <p><a id="lnkMail" href="">Stel een e-mailadres in...</a></p>
     <div class="modal" id="mailAddress">
-        <form action="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'index'), null, true) ?>" method="post">
+        <form action="<?php echo $this->url(array('controller' => 'Parent', 'action' => 'index'), null, true) ?>" 
+              method="post">
             <div class="modal-header">
                 <button class="close" data-dismiss="modal">&times;</button>
                 <h4>E-mailadres instellen</h4>
             </div>
             <div class="modal-body">
-                <p>Wanneer u hier een e-mailadres instelt, dan geeft u de school de mogelijkheid u te informeren en herinneren aan uw gemaakte afspraken</p>
+                <p>Wanneer u hier een e-mailadres instelt, 
+                  dan geeft u de school de mogelijkheid u te informeren en 
+                  herinneren aan uw gemaakte afspraken</p>
                 <dl>
                     <dt><label for="txtMail">E-mail:</label></dt>
-                    <dd><input type="text" id="txtMail" name="txtMail" value="<?php echo htmlentities($this->mail); ?>" /></dd>
+                    <dd>
+                      <input type="text" 
+                             id="txtMail" 
+                             name="txtMail" 
+                             value="<?php echo htmlentities($this->mail, ENT_NOQUOTES, 'utf-8'); ?>" />
+                    </dd>
                 </dl>
             </div>
             <div class="modal-footer">
-                <input type="submit" class="btn btn-primary" name="btnSave" value="Bewaren" />
-                <input type="button" class="btn btnCancel" id="btnCancel" name="btnCancel" value="Annuleren" />
+                <input type="submit" 
+                       class="btn btn-primary" 
+                       name="btnSave" 
+                       value="Bewaren" />
+                <input type="button" 
+                       class="btn btnCancel" 
+                       id="btnCancel" 
+                       name="btnCancel" 
+                       value="Annuleren" />
             </div>
         </form>
     </div>
