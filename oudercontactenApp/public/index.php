@@ -4,8 +4,10 @@
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 
-// Define application environment
-/*
+/* Define application environment
+ * 
+ * change to development for more error logging
+ * 
  * options are
  * production
  * staging
