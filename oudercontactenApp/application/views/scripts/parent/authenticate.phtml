@@ -6,19 +6,34 @@
 
     <div class="screen">
         <h2>Aanmelden</h2>
-        <form id="loginForm" action="<?php echo $this->urlSelf ?>" method="post">
+        <form id="loginForm" 
+              action="<?php echo $this->urlSelf ?>" 
+              method="post">
             <dl>
                 <dt><label for="txtLogin">Gebruikersnaam ouder</label></dt>
                 <dd>
-                    <input type="text" id="txtLogin" name="txtLogin" value="<?php echo htmlentities($this->valLogin); ?>" />
+                    <input type="text" 
+                           id="txtLogin" 
+                           name="txtLogin" 
+                           value="<?php echo htmlentities($this->valLogin, ENT_NOQUOTES, 'utf-8'); ?>" />
                 </dd>
                 <dt><label for="txtPassword">Wachtwoord</label></dt>
                 <dd>
-                    <input type="password" id="txtPassword" name="txtPassword" />
+                    <input type="password" 
+                           id="txtPassword" 
+                           name="txtPassword" />
                 </dd>
                 <dd>
-                    <input type="submit" id="btnLogin" class="btn btn-primary" name="btnLogin" value="Inloggen" />
-                    <input type="submit" id="btnCancel" class="btn" name="btnCancel" value="Annuleren" />
+                    <input type="submit" 
+                           id="btnLogin" 
+                           class="btn btn-primary" 
+                           name="btnLogin" 
+                           value="Inloggen" />
+                    <input type="submit" 
+                           id="btnCancel" 
+                           class="btn" 
+                           name="btnCancel" 
+                           value="Annuleren" />
                 </dd>
             </dl>
         </form>
@@ -26,19 +41,25 @@
         <?php if($this->formErr) { ?>
         <div class="alert alert-error">
             <a class="close" data-dismiss="alert">&times;</a>
-            <p><strong>Oeps!</strong> U heeft niet alle velden ingevuld. Gelieve uw gebruikersnaam en bijhorend wachtwoord in te vullen.</p>
+            <p><strong>Oeps!</strong> 
+              U heeft niet alle velden ingevuld. 
+              Gelieve uw gebruikersnaam en bijhorend wachtwoord in te vullen.</p>
         </div>
         <?php } ?>
         <?php if($this->userErr) { ?>
         <div class="alert alert-error">
             <a class="close" data-dismiss="alert">&times;</a>
-            <p><strong>Oeps!</strong> U heeft een gebruikersnaam gebruikt die niet bestaat. Controleer de gegevens en probeer opnieuw.</p>
+            <p><strong>Oeps!</strong> 
+              U heeft een gebruikersnaam gebruikt die niet bestaat. 
+              Controleer de gegevens en probeer opnieuw.</p>
         </div>
         <?php } ?>
         <?php if($this->passErr) { ?>
         <div class="alert alert-error">
             <a class="close" data-dismiss="alert">&times;</a>
-            <p><strong>Oeps!</strong> U heeft een wachtwoord ingevuld dat niet geldig is in combinatie met de ingevulde gebruikersnaam.</p>
+            <p><strong>Oeps!</strong> 
+              U heeft een wachtwoord ingevuld dat niet geldig is 
+              in combinatie met de ingevulde gebruikersnaam.</p>
         </div>
         <?php } ?>
     </div>
